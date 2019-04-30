@@ -6,8 +6,6 @@ import styled from "styled-components";
 
 const AppContainer = styled.div``;
 
-console.log(process.env);
-
 const App: React.FC = () => {
   return (
     <>

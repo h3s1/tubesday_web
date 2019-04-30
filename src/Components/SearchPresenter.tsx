@@ -5,25 +5,24 @@ import axios from 'axios'
 
 const Search = Input.Search;
 
-interface IProps {}
+interface IProps {addSearchedResults(searchedResults: any[]): {type: string; payload: any[]}}
 interface IState { searchText: string}
 
-class SearchBox extends React.Component<IProps, IState> {
+class SearchPresenter extends React.Component<IProps, IState> {
   state = {searchText: ""}
 
   handleTextInput (e: any) {
     this.setState({searchText: e.target.value})
-    // this.handleSearch()
   }
 
   async handleSearch() {
     const key = process.env.REACT_APP_GOOGLE_API_KEY
     const {searchText} = this.state
     const res = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${searchText}&key=${key}`)
-    console.log(res.data.items)
+    this.props.addSearchedResults(res.data.items)
+    // console.log(res.data.items)
   }
   render() {
-    console.log(this.state)
     return (
       <Container>
           <Search style={{width: "50vw"}} onChange={e=>this.handleTextInput(e)} onPressEnter={() => this.handleSearch()}/>
@@ -34,4 +33,4 @@ class SearchBox extends React.Component<IProps, IState> {
 
 const Container = styled.div``
 
-export default SearchBox
+export default SearchPresenter

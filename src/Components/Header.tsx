@@ -1,19 +1,19 @@
 import React from "react"
 import styled from 'styled-components'
-import SearchBox from "./SearchBox"
+import SearchContainer from "./SearchContainer"
 import {Button} from "antd"
 import logo from "../logo_main.svg"
+
 
 const Header: React.SFC<{}> = ({}) => (
     <HeaderContainer>
       <InnerContainer>
       <img src={logo} />
-      <SearchBox />
+      <SearchContainer />
       <Button type="ghost">다음</Button>
       </InnerContainer>
       </HeaderContainer>
   );
-
 
 const HeaderContainer = styled.div`
     position: fixed;

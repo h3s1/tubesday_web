@@ -1,11 +1,13 @@
 import React from "react";
+import {connect} from 'react-redux'
 import CreatePostPresenter from "./CreatePostPresenter";
+
 
 interface IProps {}
 
 interface IState {}
 
-export default class CreatePostContainer extends React.Component<
+class CreatePostContainer extends React.Component<
   IProps,
   IState
 > {
@@ -13,3 +15,8 @@ export default class CreatePostContainer extends React.Component<
     return <CreatePostPresenter />;
   }
 }
+
+const mapStateToProps = (state:{}):{} => state;
+
+
+export default connect(mapStateToProps)(CreatePostContainer)

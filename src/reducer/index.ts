@@ -4,7 +4,7 @@ const INITIAL_STATE: {searchResults: []} = {
     searchResults: []
 }
 
-const reducer = (state=INITIAL_STATE, action: {type:string; payload: any}) => {
+const reducer = (state=INITIAL_STATE, action: any) => {
     switch(action.type) {
         case ADD_SEARCHED:
             return action.payload
