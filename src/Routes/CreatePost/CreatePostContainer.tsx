@@ -1,5 +1,5 @@
 import React from "react";
-import { CreatePostPresenter } from "./CreatePostPresenter";
+import CreatePostPresenter from "./CreatePostPresenter";
 
 interface IProps {}
 
