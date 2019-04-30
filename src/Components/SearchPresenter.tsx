@@ -20,7 +20,6 @@ class SearchPresenter extends React.Component<IProps, IState> {
     const {searchText} = this.state
     const res = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${searchText}&key=${key}`)
     this.props.addSearchedResults(res.data.items)
-    // console.log(res.data.items)
   }
   render() {
     return (
