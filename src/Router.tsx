@@ -7,9 +7,9 @@ import CreatePost from "./Routes/CreatePost";
 export const Router: React.SFC<{}> = ({}) => (
   <>
     <Switch>
+    <Route path="/posts/create" component={CreatePost} />
       <Route path="/posts/:postId" component={PostDetail} />
-      <Route path="/posts/create" component={CreatePost} />
-      <Route path="/" component={PostList} />
+      <Route exact path="/" component={PostList} />
     </Switch>
   </>
 );
