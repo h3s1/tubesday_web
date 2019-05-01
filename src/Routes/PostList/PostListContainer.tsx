@@ -3,7 +3,9 @@ import { PostListPresenter } from "./PostListPresenter";
 
 interface IProps {}
 
-interface IState {}
+interface IState {
+  currentMenu: string;
+}
 
 export default class PostListContainer extends React.Component<IProps, IState> {
   render() {
