@@ -5,7 +5,10 @@ import styled from "styled-components"
 
 
 interface IProps {selectedResult:any}
-interface IState {title:string; channelId:string; img:string}
+interface IState {
+    title:string; channelId:string; img:string;
+    post:{title:string; content:string; tags:string[]}
+}
 
 const {TextArea} = Input
 // const Option = Select.Option;
@@ -16,10 +19,27 @@ class PostForm extends React.Component<IProps, IState> {
         this.state = {
             title: props.selectedResult.snippet.title,
             channelId: props.selectedResult.snippet.channelTitle,
-            img: props.selectedResult.snippet.thumbnails.high.url
+            img: props.selectedResult.snippet.thumbnails.high.url,
+            post: {
+                title: "",
+                content: "",
+                tags: [""],
+            }
         }
-        console.log(props.selectedResult)
     }
+
+    handleInput(e:{target:{name:string;value:string}}) {
+        this.setState({
+            post: {
+                ...this.state.post,
+                [e.target.name]: e.target.value
+            }
+        })
+    }
+
+    // handleSubmit() {
+
+    // }
     
     render() {
         const {title, channelId, img} = this.state
@@ -35,9 +55,9 @@ class PostForm extends React.Component<IProps, IState> {
             />
             <InputContainer>
             <Title>제목</Title>
-                <Input placeholder="제목" />
+                <Input placeholder="제목" name="title" onChange={e => this.handleInput(e)}/>
                 <Title>콘텐츠 소개</Title>
-                <TextArea rows={10} placeholder="텐츠 소개" />
+                <TextArea rows={10} placeholder="텐츠 소개" name="content" onChange={e => this.handleInput(e)}/>
                 <Title># 태그</Title>
                 <Select
                     mode="tags"
