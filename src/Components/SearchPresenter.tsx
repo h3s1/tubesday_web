@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const Search = Input.Search;
 
-interface IProps {addSearchedResults(searchedResults: any[]): {type: string; payload: any[]}}
+interface IProps {addSearchedResults(searchedResults: any[]): {type: string; payload: {}}}
 interface IState { searchText: string}
 
 class SearchPresenter extends React.Component<IProps, IState> {

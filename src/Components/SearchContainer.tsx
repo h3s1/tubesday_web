@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux'
 import {addSearchedResults} from "../actions"
 import SearchPresenter from "./SearchPresenter"
 
-interface IProps {addSearchedResults(searchedResults: any[]): {type: string; payload: any[]}}
+interface IProps {addSearchedResults(searchedResults: any[]): {type: string; payload: {}}}
 interface IState {}
 
 
@@ -13,7 +13,7 @@ class SearchContainer extends React.Component<
   IState
 > {
   render() {
-    return <SearchPresenter addSearchedResults={this.props.addSearchedResults}/>;
+    return <SearchPresenter addSearchedResults={this.props.addSearchedResults} />;
   }
 }
 

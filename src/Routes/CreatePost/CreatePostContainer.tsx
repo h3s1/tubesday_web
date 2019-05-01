@@ -3,16 +3,27 @@ import {connect} from 'react-redux'
 import CreatePostPresenter from "./CreatePostPresenter";
 
 
-interface IProps {}
+interface IProps {searchedResults: any[]}
 
-interface IState {}
+interface IState {searchedResults: any[]}
 
 class CreatePostContainer extends React.Component<
   IProps,
   IState
 > {
+
+  state = {searchedResults: []}
+
+  componentDidUpdate(prevProps:{}, prevState:{}) {
+    if (prevProps !== this.props) {
+      this.setState({searchedResults: this.props.searchedResults})
+    }
+  }
+
   render() {
-    return <CreatePostPresenter />;
+    return <CreatePostPresenter 
+    searchedResults={this.state.searchedResults}
+    />;
   }
 }
 
