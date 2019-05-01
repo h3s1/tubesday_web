@@ -4,26 +4,54 @@ import styled from "styled-components"
 import 'antd/dist/antd.css'
 import ClipList from "../../Components/ClipList"
 import PostForm from "../../Components/PostForm"
+import PostView from "../../Components/PostView"
 
 interface IProps {
-  searchedResults: any[]
+  searchedResults: object[]
 }
 
 interface IState {
-  type: string,
-  selectedResult: {}
+  type: string;
+  selectedResult: {};
+  post: {
+    title: string;
+    content: string;
+    tags:string[]
+  }
 }
 
 export default class CreatePostPresenter extends React.Component<
   IProps,
   IState
 > {
-  state = {type: "search_results", selectedResult: {}}
+  constructor(props:{searchedResults: object[]}) {
+    super(props)
+    this.state = {
+      type: "search_results", 
+      selectedResult: {},
+      post: {
+        title: "",
+        content: "",
+        tags: [""]
+      }
+    }
+  }
 
   handleNext(selectedResult:{}) {
     this.setState({
       type: "form",
       selectedResult
+    })
+  }
+
+  handleInput(post:{
+    title:string;
+    content:string;
+    tags: string[]
+  }):void {
+    this.setState({
+      post,
+      
     })
   }
 
@@ -35,9 +63,14 @@ export default class CreatePostPresenter extends React.Component<
         handleNext={this.handleNext.bind(this)}
         />
       case "form":
-        return <PostForm selectedResult={this.state.selectedResult}/>
+        return <PostForm 
+        selectedResult={this.state.selectedResult} 
+        handleInputSubmit={this.handleInput.bind(this)}
+        />
       case "view":
-        return <div>View</div> 
+        return <PostView 
+          created={{selectedResult: this.state.selectedResult, post: this.state.post}}
+        />
       default:
         return null
     }
