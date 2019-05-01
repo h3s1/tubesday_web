@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import ClipCard from "./ClipCard"
 
-interface IProps{searchedResults: any[]}
+interface IProps{searchedResults: any[]; handleNext(selected: number): void}
 interface IState{searchedResults: any[]; selected: number}
 
 class ClipList extends React.Component<IProps, IState> {
@@ -15,8 +15,9 @@ class ClipList extends React.Component<IProps, IState> {
     }
 
     handleSelect(idx:number) {
-        const {selected} = this.state
+        const {searchedResults, selected} = this.state
         this.setState({selected: selected === idx ? -1 : idx })
+        this.props.handleNext(searchedResults[idx])
     }
 
     renderCard() {

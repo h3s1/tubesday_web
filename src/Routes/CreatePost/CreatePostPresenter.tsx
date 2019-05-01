@@ -2,38 +2,42 @@ import React from "react";
 import Header from "../../Components/Header"
 import styled from "styled-components"
 import 'antd/dist/antd.css'
-// import ClipCard from "../../Components/ClipCard"
 import ClipList from "../../Components/ClipList"
+import PostForm from "../../Components/PostForm"
 
 interface IProps {
   searchedResults: any[]
 }
 
 interface IState {
-  type: string
+  type: string,
+  selectedResult: {}
 }
+
 export default class CreatePostPresenter extends React.Component<
   IProps,
   IState
 > {
+  state = {type: "search_results", selectedResult: {}}
 
-  state = {type: "search_results"}
+  handleNext(selectedResult:{}) {
+    this.setState({
+      type: "form",
+      selectedResult
+    })
+  }
 
   renderContent() {
     switch(this.state.type) {
       case "search_results":
         return <ClipList 
-        // isSelected={true}
-        // title="Just Test"
-        // img="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-        // channelId="Testing"
-        // videoId=""
         searchedResults={this.props.searchedResults}
+        handleNext={this.handleNext.bind(this)}
         />
       case "form":
-        return <div>Form</div>
+        return <PostForm selectedResult={this.state.selectedResult}/>
       case "view":
-        return <div>View</div>
+        return <div>View</div> 
       default:
         return null
     }
@@ -50,10 +54,11 @@ export default class CreatePostPresenter extends React.Component<
   }
 }
 
-const MainContainer = styled.div``
+const MainContainer = styled.div`
+`
 
 const ContentContainer = styled.div`
-  margin-top: 10vh;
+  margin-top: 12vh;
   display: flex;
   justify-content: center;
 `
