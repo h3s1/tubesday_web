@@ -25,6 +25,7 @@ const HeaderContainer = styled.div`
     justify-content: center;
     align-items: center;
     height: 10vh;
+    z-index: 10;
 `;
 
 const InnerContainer = styled.div`

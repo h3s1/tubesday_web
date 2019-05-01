@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 const {Meta} = Card
 
-interface IProps{isSelected: boolean; title: string; channelId: string; videoId: string; img: string}
+interface IProps{isSelected: boolean; title: string; channelId: string; videoId: string; img: string; key:number}
 
 interface IWrapperProps{isSelected:boolean}
 
@@ -13,7 +13,7 @@ const ClipCard: React.SFC<IProps> = ({isSelected, title, img, channelId, videoId
   <HighLight isSelected={isSelected}><p>✔️</p></HighLight>
     <Card
     hoverable
-    style={{ width: 240, height: 400 }}
+    style={{ width: "500px", height: "480px" }}
     cover={<img alt="example" src={img} />}
   >
     <Meta
@@ -28,12 +28,12 @@ const HighLight = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${(props: IWrapperProps) => (props.isSelected? "#bbb" : "null")};
-  width: 240px;
-  height: 400px;
+  background: ${(props: IWrapperProps) => (props.isSelected? "#bbb" : "none")};
+  width: 500px;
+  height: 480px;
   position: absolute;
   opacity: 0.8;
-  z-index: 10;
+  z-index: ${(props: IWrapperProps) => (props.isSelected? "2" : "0")}
   p {
     font-size: 5vw
   } 

@@ -54,5 +54,7 @@ const MainContainer = styled.div``
 
 const ContentContainer = styled.div`
   margin-top: 10vh;
+  display: flex;
+  justify-content: center;
 `
 
