@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../../Components/PostCreateHeader";
+import PostCreateHeader from "../../Components/PostCreateHeader";
 import styled from "styled-components";
 import ClipList from "../../Components/ClipList";
 import PostForm from "../../Components/PostForm";
@@ -80,19 +80,25 @@ export default class CreatePostPresenter extends React.Component<
   }
 
   render() {
+    const {type} = this.state
     return (
       <MainContainer>
-        <Header />
+        <PostCreateHeader type={type}/>
         <ContentContainer>{this.renderContent()}</ContentContainer>
       </MainContainer>
     );
   }
 }
 
-const MainContainer = styled.div``;
+const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+
 
 const ContentContainer = styled.div`
-  margin-top: 12vh;
+  margin-top: 6rem;
   display: flex;
   justify-content: center;
 `;

@@ -24,7 +24,7 @@ class SearchPresenter extends React.Component<IProps, IState> {
   render() {
     return (
       <Container>
-          <Search style={{width: "50vw"}} onChange={e=>this.handleTextInput(e)} onPressEnter={() => this.handleSearch()}/>
+          <Search placeholder="영상 / 채널 검색" style={{width: "50vw"}} onChange={e=>this.handleTextInput(e)} onPressEnter={() => this.handleSearch()}/>
       </Container>
     );
   }

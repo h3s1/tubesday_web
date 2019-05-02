@@ -35,7 +35,7 @@ class ClipList extends React.Component<IProps, IState> {
         /></GhostButton>
             })
         }
-        return "nothing ready"
+        return "찾는 영상 혹은 채널을 검색해 주세요"
     }
 
     render() {
