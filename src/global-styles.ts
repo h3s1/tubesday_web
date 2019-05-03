@@ -20,5 +20,7 @@ ${reset};
   
   button{
     cursor: pointer;
+    border: none;
+    background-color: white;
   }
 `;

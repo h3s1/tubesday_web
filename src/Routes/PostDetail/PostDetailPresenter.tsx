@@ -1,16 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
+import { Avatar } from "../../Components/Avatar";
+import { IPost, IComment } from "../../shared-interfaces";
+import { headerHeight } from "../../config/_mixin";
 
-const PlayerWrapper = styled.div`
-  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+const PlayerWrapper = styled.div<{ headerHeight: string }>`
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+  top: ${props => props.headerHeight}
+  height: 54vw; /* Player ratio: 100 / (1280 / 720) */
 `;
 
 /* z-index of fixed position should be 2 */
 const FixedContainer = styled.div`
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   position: fixed;
   z-index: 2;
   width: 100%;
@@ -18,115 +26,215 @@ const FixedContainer = styled.div`
 `;
 
 const PostDetailContainer = styled.div`
-  position: relative;
-  top: 3rem;
+  margin-top: 5rem;
+  padding: 0.5rem 1rem;
 `;
 
 const FakeHeader = styled.div`
   width: 100%;
-  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+  height: 54vw; /* Player ratio: 100 / (1280 / 720) */
 `;
 
 const Title = styled.div`
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  padding: 0.5rem 1rem;
+  margin: 0.5rem 0 1rem;
 `;
 
-const Author = styled.div``;
+const TagContainer = styled.div`
+  display: flex;
+  margin: 0.5rem 0;
+`;
 
-const Content = styled.div``;
+const Tag = styled.div`
+  color: #46abf3;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding-right: 0.5rem;
+  cursor: pointer;
+`;
+
+const SubInfoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+`;
+
+const CountableInfoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 1rem 0;
+`;
+
+const CountableInfoIcon = styled.i`
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+`;
+
+const CountableInfo = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const CountableNumber = styled.div``;
 
 const Datetime = styled.div``;
 
+const Content = styled.div``;
+
+const Comments = styled.div`
+  height: 100%;
+`;
+
+const Comment = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.3);
+`;
+
+const CommentContent = styled.div``;
+
+const ShortcutContainer = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+`;
+
+const Shortcut = styled.button`
+  padding: 0.5rem 0;
+  border: 0.3px solid rgba(0, 0, 0, 0.3);
+`;
+
+const ShortcutIcon = styled.i``;
+
+const PostList = styled.div``;
+
+/* Change if PostList finished */
+const DummyPost = styled.img`
+  width: 100%;
+`;
+
 interface IProps {
   id: number;
-  data: {
-    no: number;
-    title: string;
-    videoId: string;
-    author: string;
-    content: string;
-    datetime: string;
-  };
+  data: IPost;
+  scrollToSection: (sectionRef: React.RefObject<HTMLDivElement>) => void;
+  homeRef: React.RefObject<HTMLDivElement>;
+  commentRef: React.RefObject<HTMLDivElement>;
+  listRef: React.RefObject<HTMLDivElement>;
 }
 
 export const PostDetailPresenter: React.SFC<IProps> = ({
-  data: { videoId, title, author, content, datetime },
-  id
+  data: {
+    videoId,
+    tags,
+    title,
+    author,
+    datetime,
+    content,
+    likes,
+    comments,
+    views
+  },
+  id,
+  scrollToSection,
+  homeRef,
+  commentRef,
+  listRef
 }) => (
   <>
+    <PlayerWrapper headerHeight={headerHeight} className="player-wrapper">
+      <ReactPlayer
+        url={`https://www.youtube.com/watch?v=${videoId}`}
+        playing={false}
+        loop={true}
+        controls={false}
+        width="100%"
+        height="100%"
+        onReady={() => console.log("video ready")}
+        onError={() => console.log("video error")}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0
+        }}
+      />
+    </PlayerWrapper>
     <FixedContainer>
-      <PlayerWrapper className="player-wrapper">
-        <ReactPlayer
-          url={`https://www.youtube.com/watch?v=${videoId}`}
-          playing={false}
-          loop={true}
-          controls={false}
-          width="100%"
-          height="100%"
-          onReady={() => console.log("video ready")}
-          onError={() => console.log("video error")}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0
-          }}
-        />
-      </PlayerWrapper>
-    </FixedContainer>
-    <PostDetailContainer>
       <FakeHeader />
-      <Title>제목: {title}</Title>
-      <Author>글쓴이: {author}</Author>
-      <Datetime>날짜: {datetime}</Datetime>
-      <Content>내용: {content}</Content>
+      <ShortcutContainer>
+        <Shortcut onClick={() => scrollToSection(homeRef)}>
+          <ShortcutIcon className="fas fa-home" />
+        </Shortcut>
+        <Shortcut onClick={() => scrollToSection(commentRef)}>
+          <ShortcutIcon className="far fa-comments" />
+        </Shortcut>
+        <Shortcut onClick={() => scrollToSection(listRef)}>
+          <ShortcutIcon className="far fa-list-alt" />
+        </Shortcut>
+      </ShortcutContainer>
+    </FixedContainer>
+    <FakeHeader />
+    <PostDetailContainer ref={homeRef}>
+      <TagContainer>
+        {tags.map((tag: string) => (
+          <Tag>#{tag}</Tag>
+        ))}
+      </TagContainer>
+      <Title>{title}</Title>
+      <SubInfoContainer>
+        <Avatar user={author} />
+        <Datetime>{datetime}</Datetime>
+      </SubInfoContainer>
+      <CountableInfoContainer>
+        <CountableInfo>
+          <CountableInfoIcon className="far fa-comments" />
+          <CountableNumber>{comments.length}</CountableNumber>
+        </CountableInfo>
+        <CountableInfo>
+          <CountableInfoIcon className="far fa-thumbs-up" />
+          <CountableNumber>{likes}</CountableNumber>
+        </CountableInfo>
+        <CountableInfo>
+          <CountableInfoIcon className="far fa-eye" />
+          <CountableNumber>{views}</CountableNumber>
+        </CountableInfo>
+      </CountableInfoContainer>
+      <Content dangerouslySetInnerHTML={{ __html: content }} />
       Post Detail of postId {id}
-      Buddy, you're a boy, make a big noise Playing in the street, gonna be a
-      big man someday You got mud on your face, you big disgrace Kicking your
-      can all over the place, singin' We will, we will rock you We will, we will
-      rock you Buddy, you're a young man, hard man Shouting in the street, gonna
-      take on the world someday You got blood on your face, you big disgrace
-      Waving your banner all over the place We will, we will rock you, sing it!
-      We will, we will rock you, yeah Buddy, you're an old man, poor man
-      Pleading with your eyes, gonna get you some peace someday You got mud on
-      your face, big disgrace Somebody better put you back into your place, do
-      it! We will, we will rock you, yeah, yeah, come on We will, we will rock
-      you, alright, louder! We will, we will rock you, one more time We will, we
-      will rock you YeahBuddy, you're a boy, make a big noise Playing in the
-      street, gonna be a big man someday You got mud on your face, you big
-      disgrace Kicking your can all over the place, singin' We will, we will
-      rock you We will, we will rock you Buddy, you're a young man, hard man
-      Shouting in the street, gonna take on the world someday You got blood on
-      your face, you big disgrace Waving your banner all over the place We will,
-      we will rock you, sing it! We will, we will rock you, yeah Buddy, you're
-      an old man, poor man Pleading with your eyes, gonna get you some peace
-      someday You got mud on your face, big disgrace Somebody better put you
-      back into your place, do it! We will, we will rock you, yeah, yeah, come
-      on We will, we will rock you, alright, louder! We will, we will rock you,
-      one more time We will, we will rock you YeahBuddy, you're a boy, make a
-      big noise Playing in the street, gonna be a big man someday You got mud on
-      your face, you big disgrace Kicking your can all over the place, singin'
-      We will, we will rock you We will, we will rock you Buddy, you're a young
-      man, hard man Shouting in the street, gonna take on the world someday You
-      got blood on your face, you big disgrace Waving your banner all over the
-      place We will, we will rock you, sing it! We will, we will rock you, yeah
-      Buddy, you're an old man, poor man Pleading with your eyes, gonna get you
-      some peace someday You got mud on your face, big disgrace Somebody better
-      put you back into your place, do it! We will, we will rock you, yeah,
-      yeah, come on We will, we will rock you, alright, louder! We will, we will
-      rock you, one more time We will, we will rock you YeahBuddy, you're a boy,
-      make a big noise Playing in the street, gonna be a big man someday You got
-      mud on your face, you big disgrace Kicking your can all over the place,
-      singin' We will, we will rock you We will, we will rock you Buddy, you're
-      a young man, hard man Shouting in the street, gonna take on the world
-      someday You got blood on your face, you big disgrace Waving your banner
-      all over the place We will, we will rock you, sing it! We will, we will
-      rock you, yeah Buddy, you're an old man, poor man Pleading with your eyes,
-      gonna get you some peace someday You got mud on your face, big disgrace
-      Somebody better put you back into your place, do it! We will, we will rock
-      you, yeah, yeah, come on We will, we will rock you, alright, louder! We
-      will, we will rock you, one more time We will, we will rock you Yeah
+      Post Detail of postId {id}Post Detail of postId {id}Post Detail of postId{" "}
+      {id}Post Detail of postId {id}Post Detail of postId {id}Post Detail of
+      postId {id}Post Detail of postId {id}Post Detail of postId {id}Post Detail
+      of postId {id}Post Detail of postId {id}Post Detail of postId {id}Post
+      Detail of postId {id}Post Detail of postId {id}Post Detail of postId {id}
+      Post Detail of postId {id}Post Detail of postId {id}Post Detail of postId{" "}
+      {id}Post Detail of postId {id}Post Detail of postId {id}Post Detail of
+      postId {id}Post Detail of postId {id}Post Detail of postId {id}Post Detail
+      of postId {id}Post Detail of postId {id}Post Detail of postId {id}Post
+      Detail of postId {id}Post Detail of postId {id}Post Detail of postId {id}
+      Post Detail of postId {id}
+      <Comments ref={commentRef}>
+        {comments.map((comment: IComment) => {
+          console.log(comment);
+          return (
+            <Comment>
+              <Avatar user={comment.author} />
+              <CommentContent>{comment.content}</CommentContent>
+            </Comment>
+          );
+        })}
+      </Comments>
+      <PostList ref={listRef}>
+        <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
+        <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
+        <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
+        <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
+        <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
+        <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
+      </PostList>
     </PostDetailContainer>
   </>
 );
