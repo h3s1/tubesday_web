@@ -62,7 +62,6 @@ export default class CreatePostPresenter extends React.Component<
         return (
           <PostForm
             selectedResult={this.state.selectedResult}
-            handleInputSubmit={this.handleInput.bind(this)}
           />
         );
       case "view":

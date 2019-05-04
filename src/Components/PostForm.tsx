@@ -1,10 +1,10 @@
 import React from 'react'
-import {Input, Select, Button} from 'antd'
+import {Input, Select} from 'antd'
 import ClipCard from "./ClipCard"
 import styled from "styled-components"
 
 
-interface IProps {selectedResult:any; handleInputSubmit(post:{title:string; content:string; tags:string[]}):void}
+interface IProps {selectedResult:any;}
 interface IState {
     title:string; channelId:string; img:string;
     post:{title:string; content:string; tags:string[]}
@@ -37,10 +37,10 @@ class PostForm extends React.Component<IProps, IState> {
         })
     }
 
-    handleSubmit() {
-        const {post} = this.state
-        this.props.handleInputSubmit(post)
-    }
+    // handleSubmit() {
+    //     const {post} = this.state
+    //     this.props.handleInputSubmit(post)
+    // }
     
     render() {
         const {title, channelId, img} = this.state
@@ -68,7 +68,6 @@ class PostForm extends React.Component<IProps, IState> {
                 >
                     {/* [<Option>IU</Option>] */}
                 </Select>
-                <Button onClick={this.handleSubmit}>확인</Button>
             </InputContainer>
         </MainContainer>
         )
@@ -78,10 +77,12 @@ class PostForm extends React.Component<IProps, IState> {
 const MainContainer = styled.div`
     width: 90%;
     display: flex;
+    flex-direction: column;
+    align-items: center;
 `
 
 const InputContainer = styled.div`
-flex: 1
+    width: 100%;
     margin-left: 3vw;
 `
 
