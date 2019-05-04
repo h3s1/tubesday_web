@@ -1,12 +1,11 @@
 import React from "react";
-import "antd/dist/antd.css";
 import { Layout, Input, Menu } from "antd";
 import PostCardPresenter from "./PosrCardPresenter";
 
 const { Header, Content } = Layout;
 const Search = Input.Search;
 
-const list: Array<Object> = [
+const list: any[] = [
   {
     no: 1,
     title: "대망의 첫번째 글임",
@@ -68,7 +67,7 @@ export const PostListPresenter: React.SFC<{}> = ({}) => (
       />
       <div style={{ background: "#fff", padding: 24, minHeight: 280 }}>
         {list.map(item => (
-          <PostCardPresenter />
+          <PostCardPresenter key={item.no} />
         ))}
       </div>
     </Content>

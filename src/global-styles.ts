@@ -15,12 +15,21 @@ ${reset};
   }
 
   a{
-
+    color: unset;
+    &:hover{
+      color: unset;
+    }
   }
   
   button{
     cursor: pointer;
-    border: none;
     background-color: white;
+    outline: none;
+    border: none;
+    &:active {
+      outline: none;
+      border: none;
+    }
   }
+
 `;
