@@ -1,6 +1,7 @@
 import React from "react";
 import { Layout, Input, Menu } from "antd";
 import PostCardPresenter from "./PosrCardPresenter";
+import { Link } from "react-router-dom";
 
 const { Header, Content } = Layout;
 const Search = Input.Search;
@@ -67,7 +68,9 @@ export const PostListPresenter: React.SFC<{}> = ({}) => (
       />
       <div style={{ background: "#fff", padding: 24, minHeight: 280 }}>
         {list.map(item => (
-          <PostCardPresenter key={item.no} />
+          <Link to={`/posts/${item.no}/`}>
+            <PostCardPresenter key={item.no} />
+          </Link>
         ))}
       </div>
     </Content>

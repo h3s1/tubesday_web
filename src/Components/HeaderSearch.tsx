@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import { withRouter, RouteComponentProps } from "react-router-dom";
+// import { media } from "../config/_mixin";
 
 const Container = styled.div`
   position: relative;
@@ -35,12 +36,8 @@ const ExecuteSearchIcon = styled.i`
   color: #555;
 `;
 
-interface ISearchTermProps {
-  open: boolean;
-}
-
-const SearchTerm = styled("input")<ISearchTermProps>`
-  width: ${props => (props.open ? "37vw" : "0px")};
+const SearchTerm = styled.input<{ open: boolean }>`
+  width: ${props => (props.open ? "10rem" : "0px")};
   height: 1.7rem;
   transition: 0.5s ease;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
@@ -82,7 +79,7 @@ const HeaderSearch = ({ history }: RouteComponentProps) => {
     if (open) {
       setOpen(!open);
     } else {
-      if (inputRef != undefined && inputRef.current != undefined) {
+      if (inputRef !== undefined && inputRef.current !== undefined) {
         console.log(inputRef);
         inputRef.current.focus();
       }

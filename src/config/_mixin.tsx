@@ -18,7 +18,7 @@ export const color = { bgColor: "#141414", fontColor: "#000" };
 const customMediaQuery = (maxWidth: number) =>
   `@media (max-width: ${maxWidth}px)`;
 
-export const media = {
+export const media: any = {
   custom: customMediaQuery,
   desktop: customMediaQuery(sizes.desktop),
   tablet: customMediaQuery(sizes.tablet),

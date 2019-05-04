@@ -133,7 +133,7 @@ export default class PostDetailContainer extends React.Component<
     console.log(data);
     return (
       data &&
-      status == "success" && (
+      status === "success" && (
         <PostDetailPresenter
           data={data}
           id={parseInt(postId)}
