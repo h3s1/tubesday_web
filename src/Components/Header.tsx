@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../logo_main.svg";
+import { headerHeight } from "../config/_mixin";
 
 const Header: React.SFC<{}> = ({}) => (
-  <HeaderContainer>
+  <HeaderContainer headerHeight={headerHeight}>
     <Logo src={logo} />
     <IconContainer>
       <Icon className="fas fa-pen" />
@@ -22,13 +23,17 @@ const Icon = styled.i`
   padding: 0.5rem;
 `;
 
-const HeaderContainer = styled.div`
+interface IHeaderContainerProps {
+  headerHeight: string;
+}
+
+const HeaderContainer = styled.div<IHeaderContainerProps>`
   position: fixed;
   z-index: 10;
   top: 0;
   left: 0;
   width: 100%;
-  height: 3rem;
+  height: ${props => props.headerHeight};
   padding: 0.5rem 1rem;
   background: white;
   display: flex;

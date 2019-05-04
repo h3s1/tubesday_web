@@ -5,5 +5,6 @@ const api = axios.create({
 });
 
 export const postApi = {
-  postDetail: (postId: number) => api.get(`article/${postId}`)
+  postDetail: (postId: number) => api.get(`article/${postId}`),
+  comments: (postId: number) => api.get(`comment/${postId}`)
 };
