@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 interface IProps {
   user: IAvatar;
+  style?: "photoOnly" | "nicknameOnly" | "both";
 }
 
 const AvatarContainer = styled.div`
@@ -17,17 +18,25 @@ const AntAvatarStyle = {
 };
 
 export const Avatar: React.SFC<IProps> = ({
-  user: { profileImage, nickname }
+  user: { profileImage, nickname },
+  style
 }) =>
   profileImage ? (
     <AvatarContainer>
-      <AntAvatar style={AntAvatarStyle} src={profileImage} />
-      {nickname}
+      {(style === "photoOnly" || style === "both" || style === undefined) && (
+        <AntAvatar style={AntAvatarStyle} src={profileImage} />
+      )}
+      {(style === "nicknameOnly" || style === "both" || style === undefined) &&
+        nickname}
     </AvatarContainer>
   ) : (
     <AvatarContainer>
-      <AntAvatar style={AntAvatarStyle} icon="user">
-        {nickname}
-      </AntAvatar>
+      {(style === "photoOnly" || style === "both" || style === undefined) && (
+        <AntAvatar style={AntAvatarStyle} icon="user">
+          {nickname}
+        </AntAvatar>
+      )}
+      {(style === "nicknameOnly" || style === "both" || style === undefined) &&
+        nickname}
     </AvatarContainer>
   );

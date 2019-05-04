@@ -1,5 +1,5 @@
 export interface IAvatar {
-  profileImage: string | undefined;
+  profileImage?: string;
   nickname: string;
 }
 
@@ -19,4 +19,16 @@ export interface IPost {
   likes: number;
   comments: IComment[];
   views: number;
+}
+
+export interface IPostSimple {
+  no: number;
+  videoId: string;
+  tags: string[];
+  title: string;
+  author: IAvatar;
+  datetime: string;
+  likes: number;
+  views: number;
+  commentsCount: number;
 }
