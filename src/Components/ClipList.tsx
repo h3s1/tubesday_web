@@ -39,7 +39,6 @@ class ClipList extends React.Component<IProps, IState> {
     }
 
     render() {
-        console.log(this.props)
         return (
             <Container>
                 {this.renderCard()}

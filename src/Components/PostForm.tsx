@@ -79,6 +79,7 @@ const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 2rem 0;
 `
 
 const InputContainer = styled.div`

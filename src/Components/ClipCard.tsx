@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React from 'react'
 import {Card} from 'antd'
 import styled from "styled-components"
 
@@ -9,11 +9,13 @@ interface IProps{isSelected: boolean; title: string; channelId: string; videoId:
 interface IWrapperProps{isSelected:boolean}
 
 const ClipCard: React.SFC<IProps> = ({isSelected, title, img, channelId, videoId}) => (
-  <Fragment>
-  <HighLight isSelected={isSelected}><p>✔️</p></HighLight>
+  <Container>
+  <HighLight isSelected={isSelected}>
+  {/* <p>✔️</p> */}
+  </HighLight>
     <Card
     hoverable
-    style={{ width: "500px", height: "480px" }}
+    style={{ width: "100%"}}
     cover={<img alt="example" src={img} />}
   >
     <Meta
@@ -21,16 +23,20 @@ const ClipCard: React.SFC<IProps> = ({isSelected, title, img, channelId, videoId
       description={channelId}
     />
   </Card>
-  </Fragment>
+  </Container>
 )
+
+const Container =styled.div`
+  width: 100%;
+`
+
 
 const HighLight = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   background: ${(props: IWrapperProps) => (props.isSelected? "#bbb" : "none")};
-  width: 500px;
-  height: 480px;
+  width: 100%;
   position: absolute;
   opacity: 0.8;
   z-index: ${(props: IWrapperProps) => (props.isSelected? "2" : "0")}
