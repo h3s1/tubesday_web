@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import {Button} from "antd"
-import SearchContainer from "./SearchContainer";
+import CreateSearch from "../CreateSearch";
 
 interface IProps {type:string}
 
 const PostCreateHeader: React.SFC<IProps> = ({type}) => (
   <HeaderContainer>
-      {type==="search_results"?<SearchContainer />:<NavContainer />}
+      {type==="search_results"?<CreateSearch />:<NavContainer />}
   </HeaderContainer>
 );
 

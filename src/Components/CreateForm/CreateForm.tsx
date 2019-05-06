@@ -1,6 +1,6 @@
 import React from 'react'
 import {Input, Select} from 'antd'
-import ClipCard from "./ClipCard/ClipCard"
+import ClipCard from "../ClipCard"
 import styled from "styled-components"
 
 

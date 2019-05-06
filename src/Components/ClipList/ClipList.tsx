@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import ClipCard from "../ClipCard/ClipCard"
+import ClipCard from "../ClipCard"
 
 interface IProps{searchedResults: any[]; handleNext(selected: number): void}
 interface IState{searchedResults: any[]; selected: number}
