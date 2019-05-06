@@ -20,10 +20,6 @@ ${reset};
       color: unset;
     }
   }
-
-  strong{
-    font-weight: 700;
-  }
   
   button{
     cursor: pointer;

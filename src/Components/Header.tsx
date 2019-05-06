@@ -40,7 +40,7 @@ const Icon = styled.i`
   font-size: 1rem;
 `;
 
-const HeaderContainer = styled.header<{ headerHeight: string }>`
+const HeaderContainer = styled.div<{ headerHeight: string }>`
   position: fixed;
   z-index: 10;
   top: 0;

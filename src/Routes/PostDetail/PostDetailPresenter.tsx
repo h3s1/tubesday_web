@@ -5,11 +5,11 @@ import { Avatar } from "../../Components/Avatar";
 import { IPost, IComment } from "../../shared-interfaces";
 import { headerHeight } from "../../config/_mixin";
 
-const PlayerWrapper = styled.div`
+const PlayerWrapper = styled.div<{ headerHeight: string }>`
   position: fixed;
   z-index: 3;
   width: 100%;
-  top: ${headerHeight}
+  top: ${props => props.headerHeight}
   height: 54vw; /* Player ratio: 100 / (1280 / 720) */
 `;
 
@@ -26,7 +26,7 @@ const FixedContainer = styled.div`
 `;
 
 const PostDetailContainer = styled.div`
-  margin-top: 2rem;
+  margin-top: 5rem;
   padding: 0.5rem 1rem;
 `;
 
@@ -84,23 +84,16 @@ const Datetime = styled.div``;
 
 const Content = styled.div``;
 
+const Comments = styled.div`
+  height: 100%;
+`;
+
 const Comment = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 2rem 0.5rem 1rem;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.3);
-`;
-
-const Comments = styled.div`
-  height: 100%;
-  ${Comment}:nth-child(2n) {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-`;
-
-const CommentsHeader = styled.div`
-  padding: 0.5rem 2rem 0.5rem 1rem;
 `;
 
 const CommentContent = styled.div``;
@@ -112,15 +105,8 @@ const ShortcutContainer = styled.div`
 `;
 
 const Shortcut = styled.button`
-  position: relative;
   padding: 0.5rem 0;
-  border: 0.3px solid rgba(0, 0, 0, 0.2);
-  transition: 0.5s ease;
-  z-index: 3;
-  &:hover {
-    z-index: 5;
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
-  }
+  border: 0.3px solid rgba(0, 0, 0, 0.3);
 `;
 
 const ShortcutIcon = styled.i``;
@@ -160,7 +146,7 @@ export const PostDetailPresenter: React.SFC<IProps> = ({
   listRef
 }) => (
   <>
-    <PlayerWrapper className="player-wrapper">
+    <PlayerWrapper headerHeight={headerHeight} className="player-wrapper">
       <ReactPlayer
         url={`https://www.youtube.com/watch?v=${videoId}`}
         playing={false}
@@ -218,28 +204,37 @@ export const PostDetailPresenter: React.SFC<IProps> = ({
         </CountableInfo>
       </CountableInfoContainer>
       <Content dangerouslySetInnerHTML={{ __html: content }} />
+      Post Detail of postId {id}
+      Post Detail of postId {id}Post Detail of postId {id}Post Detail of postId{" "}
+      {id}Post Detail of postId {id}Post Detail of postId {id}Post Detail of
+      postId {id}Post Detail of postId {id}Post Detail of postId {id}Post Detail
+      of postId {id}Post Detail of postId {id}Post Detail of postId {id}Post
+      Detail of postId {id}Post Detail of postId {id}Post Detail of postId {id}
+      Post Detail of postId {id}Post Detail of postId {id}Post Detail of postId{" "}
+      {id}Post Detail of postId {id}Post Detail of postId {id}Post Detail of
+      postId {id}Post Detail of postId {id}Post Detail of postId {id}Post Detail
+      of postId {id}Post Detail of postId {id}Post Detail of postId {id}Post
+      Detail of postId {id}Post Detail of postId {id}Post Detail of postId {id}
+      Post Detail of postId {id}
+      <Comments ref={commentRef}>
+        {comments.map((comment: IComment) => {
+          console.log(comment);
+          return (
+            <Comment>
+              <Avatar user={comment.author} />
+              <CommentContent>{comment.content}</CommentContent>
+            </Comment>
+          );
+        })}
+      </Comments>
+      <PostList ref={listRef}>
+        <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
+        <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
+        <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
+        <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
+        <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
+        <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
+      </PostList>
     </PostDetailContainer>
-    <Comments ref={commentRef}>
-      <CommentsHeader>
-        댓글 | 총 <strong>{comments.length}</strong> 개
-      </CommentsHeader>
-      {comments.map((comment: IComment) => {
-        console.log(comment);
-        return (
-          <Comment>
-            <Avatar user={comment.author} />
-            <CommentContent>{comment.content}</CommentContent>
-          </Comment>
-        );
-      })}
-    </Comments>
-    <PostList ref={listRef}>
-      <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
-      <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
-      <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
-      <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
-      <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
-      <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
-    </PostList>
   </>
 );
