@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import ClipCard from "./ClipCard"
+import ClipCard from "../ClipCard/ClipCard"
 
 interface IProps{searchedResults: any[]; handleNext(selected: number): void}
 interface IState{searchedResults: any[]; selected: number}
@@ -25,14 +25,18 @@ class ClipList extends React.Component<IProps, IState> {
         if(searchedResults.length) {
             return searchedResults.map((item:{snippet: {thumbnails:{high:{url:string}};title:string;channelTitle:string}}, i) => {
                 const {thumbnails, title, channelTitle} = item.snippet
-                return <GhostButton key={i} onClick={() => this.handleSelect(i)}><ClipCard 
+                return (
+                <GhostButton key={i} onClick={() => this.handleSelect(i)}>
+                <ClipCard 
         key={i}
         isSelected={selected === i ? true : false}
         title={title}
         img={thumbnails.high.url}
         channelId={channelTitle}
         videoId=""
-        /></GhostButton>
+        />
+        </GhostButton>
+        )
             })
         }
         return "찾는 영상 혹은 채널을 검색해 주세요"

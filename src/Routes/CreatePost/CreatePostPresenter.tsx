@@ -90,6 +90,7 @@ export default class CreatePostPresenter extends React.Component<
 }
 
 const MainContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;
