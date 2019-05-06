@@ -4,7 +4,13 @@ import ClipCard from "./ClipCard"
 import styled from "styled-components"
 
 
+<<<<<<< HEAD
 interface IProps {selectedResult:any;}
+||||||| 303f24c... feat: add event handler to update states
+interface IProps {selectedResult:any; handleInputSubmit(post:{title:string; content:string; tags:string[]}):void}
+=======
+interface IProps {selectedResult:any}
+>>>>>>> parent of 303f24c... feat: add event handler to update states
 interface IState {
     title:string; channelId:string; img:string;
     post:{title:string; content:string; tags:string[]}
@@ -37,10 +43,21 @@ class PostForm extends React.Component<IProps, IState> {
         })
     }
 
+<<<<<<< HEAD
     // handleSubmit() {
     //     const {post} = this.state
     //     this.props.handleInputSubmit(post)
     // }
+||||||| 303f24c... feat: add event handler to update states
+    handleSubmit() {
+        const {post} = this.state
+        this.props.handleInputSubmit(post)
+    }
+=======
+    // handleSubmit() {
+
+    // }
+>>>>>>> parent of 303f24c... feat: add event handler to update states
     
     render() {
         const {title, channelId, img} = this.state
