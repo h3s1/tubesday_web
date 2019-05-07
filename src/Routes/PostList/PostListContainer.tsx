@@ -5,10 +5,10 @@ import { IPostSimple } from "../../shared-interfaces";
 interface IProps {}
 
 interface IState {
-  currentMenu: string;
+  menu: "recent" | "hot";
 }
 
-const posts: IPostSimple[] = [
+const recentPosts: IPostSimple[] = [
   {
     no: 1,
     videoId: "cG7FkoNKBzI",
@@ -56,8 +56,80 @@ const posts: IPostSimple[] = [
   }
 ];
 
+const hotPosts: IPostSimple[] = [
+  {
+    no: 1,
+    videoId: "_g6ggSNn4YU",
+    tags: ["병신TV", "장보기"],
+    title: "내일 살 거",
+    author: {
+      profileImage:
+        "https://heightline.com/wp-content/uploads/Billie-Eilish-681x534.jpg",
+      nickname: "카드값줘최리"
+    },
+    datetime: "2019-04-05 13:00:00",
+    likes: 10,
+    views: 20,
+    commentsCount: 5
+  },
+  {
+    no: 2,
+    videoId: "TcMBFSGVi1c",
+    tags: ["마블", "트레일러"],
+    title: "마블짱",
+    author: {
+      profileImage:
+        "https://heightline.com/wp-content/uploads/Billie-Eilish-681x534.jpg",
+      nickname: "슈퍼스타케이"
+    },
+    datetime: "2018-04-05 13:13:25",
+    likes: 10,
+    views: 20,
+    commentsCount: 5
+  },
+  {
+    no: 3,
+    videoId: "DyDfgMOUjCI",
+    tags: ["뮤비", "빌리 아일리쉬"],
+    title: "빌리 아일리쉬 - 뱃가이",
+    author: {
+      profileImage:
+        "https://heightline.com/wp-content/uploads/Billie-Eilish-681x534.jpg",
+      nickname: "스피드웨건"
+    },
+    datetime: "2017-04-06 01:12:24",
+    likes: 10,
+    views: 20,
+    commentsCount: 5
+  }
+];
+
 export default class PostListContainer extends React.Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
+    this.state = {
+      menu: "hot"
+    };
+  }
+
+  onClickMenuChange = (menu: "recent" | "hot") => {
+    this.setState({ menu });
+  };
+
   render() {
-    return <PostListPresenter posts={posts} />;
+    const { menu } = this.state;
+    let posts = hotPosts;
+    if (menu === "recent") {
+      posts = recentPosts;
+    } else if (menu === "hot") {
+      posts = hotPosts;
+    }
+    return (
+      <PostListPresenter
+        onClickMenuChange={this.onClickMenuChange}
+        menu={menu}
+        posts={posts}
+      />
+    );
   }
 }

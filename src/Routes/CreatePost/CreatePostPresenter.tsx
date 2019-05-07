@@ -69,10 +69,10 @@ export default class CreatePostPresenter extends React.Component<
   }
 
   render() {
-    const {type} = this.state
+    const { type } = this.state;
     return (
       <MainContainer>
-        <PostCreateHeader type={type}/>
+        <PostCreateHeader type={type} />
         <ContentContainer>{this.renderContent()}</ContentContainer>
       </MainContainer>
     );
@@ -85,10 +85,8 @@ const MainContainer = styled.div`
   flex-direction: column;
 `;
 
-
-
 const ContentContainer = styled.div`
-  margin-top: 6rem;
+  margin-top: 5rem;
   display: flex;
   justify-content: center;
 `;
