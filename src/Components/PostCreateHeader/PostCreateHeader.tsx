@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import {Button} from "antd"
+import { Button } from "antd";
 import CreateSearch from "../CreateSearch";
-import {headerHeight} from "../../config/_mixin"
+import { headerHeight } from "../../config/_mixin";
 
 interface IProps {
   type: string;
@@ -10,7 +10,7 @@ interface IProps {
 
 const PostCreateHeader: React.SFC<IProps> = ({ type }) => (
   <HeaderContainer>
-      {type==="search_results"?<CreateSearch />:<NavContainer />}
+    {type === "search_results" ? <CreateSearch /> : <NavContainer />}
   </HeaderContainer>
 );
 

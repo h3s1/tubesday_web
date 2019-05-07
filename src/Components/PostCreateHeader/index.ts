@@ -1,3 +1,3 @@
-import PostCreateHeader from "./PostCreateHeader"
+import PostCreateHeader from "./PostCreateHeader";
 
-export default PostCreateHeader
+export default PostCreateHeader;

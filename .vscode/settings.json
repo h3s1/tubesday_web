@@ -1,0 +1,21 @@
+{
+    "editor.fontSize": 16,
+    "window.zoomLevel": 0,
+    "editor.renderControlCharacters": true,
+    "open-in-browser.default": "chrome",
+    "emmet.triggerExpansionOnTab": true,
+    "markdown.extension.preview.autoShowPreviewToSide": true,
+    "[javascript]": {
+      "editor.formatOnSave": true
+    },
+    "[typescript]": {
+      "editor.formatOnSave": true
+    },
+    "editor.formatOnSave": true,
+    "terminal.integrated.shell.osx": "zsh",
+    "terminal.integrated.fontSize": 16,
+    "editor.fontFamily": "Ubuntu Mono derivative Powerline",
+    "liveServer.settings.donotShowInfoMsg": true,
+    "workbench.colorTheme": "Material Theme Darker",
+    "prettier.tslintIntegration": false
+  }

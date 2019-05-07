@@ -59,13 +59,9 @@ class ClipList extends React.Component<IProps, IState> {
     return "찾는 영상 혹은 채널을 검색해 주세요";
   }
 
-    render() {
-        return (
-            <Container>
-                {this.renderCard()}
-            </Container>
-        )
-    }
+  render() {
+    return <Container>{this.renderCard()}</Container>;
+  }
 }
 
 const Container = styled.div`

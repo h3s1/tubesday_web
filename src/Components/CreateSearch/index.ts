@@ -1,3 +1,3 @@
-import CreateSearch from "./CreateSearchContainer"
+import CreateSearch from "./CreateSearchContainer";
 
-export default CreateSearch
+export default CreateSearch;

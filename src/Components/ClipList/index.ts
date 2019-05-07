@@ -1,3 +1,3 @@
-import ClipList from "./ClipList"
+import ClipList from "./ClipList";
 
-export default ClipList
+export default ClipList;

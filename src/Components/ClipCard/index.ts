@@ -1,3 +1,3 @@
-import ClipCard from "./ClipCard"
+import ClipCard from "./ClipCard";
 
-export default ClipCard
+export default ClipCard;

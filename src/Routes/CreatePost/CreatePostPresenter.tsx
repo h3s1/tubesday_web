@@ -58,11 +58,7 @@ export default class CreatePostPresenter extends React.Component<
           />
         );
       case "form":
-        return (
-          <CreateForm
-            selectedResult={this.state.selectedResult}
-          />
-        );
+        return <CreateForm selectedResult={this.state.selectedResult} />;
       default:
         return null;
     }
