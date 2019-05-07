@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ClipCard from "./ClipCard";
+import ClipCard from "../ClipCard";
 
 interface IProps {
   searchedResults: any[];
@@ -60,7 +60,6 @@ class ClipList extends React.Component<IProps, IState> {
   }
 
   render() {
-    console.log(this.props);
     return <Container>{this.renderCard()}</Container>;
   }
 }

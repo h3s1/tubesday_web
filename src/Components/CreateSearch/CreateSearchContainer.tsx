@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { addSearchedResults } from "../actions";
+import { addSearchedResults } from "../../actions";
 import SearchPresenter from "./SearchPresenter";
 
 interface IProps {
@@ -9,7 +9,7 @@ interface IProps {
 }
 interface IState {}
 
-class SearchContainer extends React.Component<IProps, IState> {
+class CreateSearchContainer extends React.Component<IProps, IState> {
   render() {
     return (
       <SearchPresenter addSearchedResults={this.props.addSearchedResults} />
@@ -27,4 +27,4 @@ const mapDispatchToProps = (dispatch: any) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SearchContainer);
+)(CreateSearchContainer);

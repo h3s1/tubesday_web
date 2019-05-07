@@ -2,8 +2,7 @@ import React from "react";
 import PostCreateHeader from "../../Components/PostCreateHeader";
 import styled from "styled-components";
 import ClipList from "../../Components/ClipList";
-import PostForm from "../../Components/PostForm";
-import PostView from "../../Components/PostView";
+import CreateForm from "../../Components/CreateForm";
 
 interface IProps {
   searchedResults: object[];
@@ -59,16 +58,7 @@ export default class CreatePostPresenter extends React.Component<
           />
         );
       case "form":
-        return <PostForm selectedResult={this.state.selectedResult} />;
-      case "view":
-        return (
-          <PostView
-            created={{
-              selectedResult: this.state.selectedResult,
-              post: this.state.post
-            }}
-          />
-        );
+        return <CreateForm selectedResult={this.state.selectedResult} />;
       default:
         return null;
     }
@@ -86,6 +76,7 @@ export default class CreatePostPresenter extends React.Component<
 }
 
 const MainContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;
