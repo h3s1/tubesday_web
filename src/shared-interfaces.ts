@@ -4,8 +4,12 @@ export interface IAvatar {
 }
 
 export interface IComment {
-  author: IAvatar;
-  content: string;
+  id: number,
+  content: string,
+  article: number,
+  author_id: number,
+  createdAt: string,
+  updatedAt: string
 }
 
 export interface ISimplePost {

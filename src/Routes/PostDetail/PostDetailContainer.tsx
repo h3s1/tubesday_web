@@ -1,6 +1,7 @@
 import React, { createRef } from "react";
 import { PostDetailPresenter } from "./PostDetailPresenter";
 import { articleApi } from "../../api";
+import { IPost, IComment } from '../../shared-interfaces';
 // import { IPost } from "../../shared-interfaces";
 
 interface IProps {
@@ -13,7 +14,8 @@ interface IProps {
 
 interface IState {
   status: string;
-  article: any | null;
+  article: IPost | null;
+  comments: IComment[]
 }
 
 export default class PostDetailContainer extends React.Component<
@@ -24,6 +26,7 @@ export default class PostDetailContainer extends React.Component<
     super(props);
     this.state = {
       article: null,
+      comments: [],
       status: "success"
     };
   }
@@ -40,8 +43,9 @@ export default class PostDetailContainer extends React.Component<
         }
       } = this.props;
       const parsedId = parseInt(postId);
-      const {data:article} = await articleApi.getArticle(parsedId);
-      this.setState({ article });
+      const [{ data: article }, {data: comments}] = await articleApi.getArticle(parsedId);
+      console.log(article, comments)
+      this.setState({ article, comments });
     } catch (error) {
       alert(error);
     } finally {
@@ -69,13 +73,14 @@ export default class PostDetailContainer extends React.Component<
         params: { postId }
       }
     } = this.props;
-    const { article, status } = this.state;
+    const { article,comments, status } = this.state;
     console.log(article);
     return (
       article &&
       status === "success" && (
         <PostDetailPresenter
-        article={article}
+          article={article}
+          comments={comments}
           id={parseInt(postId)}
           scrollToSection={this.scrollToSection}
           homeRef={this.homeRef}

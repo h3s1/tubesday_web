@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
-// import { Avatar } from "../../Components/Avatar";
-import { IPost } from "../../shared-interfaces";
+import  Avatar  from "../../Components/Avatar";
+import { IPost, IComment } from "../../shared-interfaces";
 import { headerHeight } from "../../config/_mixin";
 
 const PlayerWrapper = styled.div`
@@ -99,11 +99,11 @@ const Comments = styled.div`
   }
 `;
 
-// const CommentsHeader = styled.div`
-//   padding: 0.5rem 2rem 0.5rem 1rem;
-// `;
+const CommentsHeader = styled.div`
+  padding: 0.5rem 2rem 0.5rem 1rem;
+`;
 
-// const CommentContent = styled.div``;
+const CommentContent = styled.div``;
 
 const ShortcutContainer = styled.div`
   width: 100%;
@@ -135,6 +135,7 @@ const PostList = styled.div``;
 interface IProps {
   id: number;
   article: IPost;
+  comments: IComment[];
   scrollToSection: (sectionRef: React.RefObject<HTMLDivElement>) => void;
   homeRef: React.RefObject<HTMLDivElement>;
   commentRef: React.RefObject<HTMLDivElement>;
@@ -145,6 +146,7 @@ export const PostDetailPresenter: React.SFC<IProps> = ({
   article: {
     id, title, video_id, content, author_id, view_count, createdAt, updatedAt, like_count, tags
   },
+  comments,
   scrollToSection,
   homeRef,
   commentRef,
@@ -211,18 +213,18 @@ export const PostDetailPresenter: React.SFC<IProps> = ({
       <Content dangerouslySetInnerHTML={{ __html: content }} />
     </PostDetailContainer>
     <Comments ref={commentRef}>
-      {/* <CommentsHeader>
-        댓글 | 총 <strong>{article.comment_count}</strong> 개
-      </CommentsHeader> */}
-      {/* {comments.map((comment: IComment) => {
+      <CommentsHeader>
+        댓글 | 총 <strong>{comments.length}</strong> 개
+      </CommentsHeader>
+      {comments.map((comment: IComment) => {
         console.log(comment);
         return (
           <Comment>
-            <Avatar user={comment.author} />
+            <Avatar user_id={comment.author_id} />
             <CommentContent>{comment.content}</CommentContent>
           </Comment>
         );
-      })} */}
+      })}
     </Comments>
     <PostList ref={listRef}>
     </PostList>
