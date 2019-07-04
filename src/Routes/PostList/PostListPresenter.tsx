@@ -1,7 +1,7 @@
 import React from "react";
 import { Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
-import { IPostSimple } from "../../shared-interfaces";
+import { ISimplePost } from "../../shared-interfaces";
 import { PostCard } from "../../Components/PostCard";
 import styled from "styled-components";
 
@@ -17,7 +17,7 @@ const CustomMenu = styled(Menu)`
 interface IProps {
   onClickMenuChange: (menu: "recent" | "hot") => void;
   menu: "recent" | "hot";
-  posts: IPostSimple[];
+  articles: ISimplePost[];
 }
 
 const PostListContainer = styled.div`
@@ -28,7 +28,7 @@ const PostListContainer = styled.div`
 export const PostListPresenter: React.SFC<IProps> = ({
   onClickMenuChange,
   menu,
-  posts
+  articles
 }) => (
   <Content style={{ padding: "0" }}>
     <CustomMenu mode="horizontal" selectedKeys={[menu]} style={{}}>
@@ -48,9 +48,9 @@ export const PostListPresenter: React.SFC<IProps> = ({
       </Menu.Item>
     </CustomMenu>
     <PostListContainer>
-      {posts.map((post: IPostSimple) => (
-        <Link key={post.no} to={`/posts/${post.no}/`}>
-          <PostCard post={post} />
+      {articles.map((article: ISimplePost) => (
+        <Link key={article.id} to={`/posts/${article.id}/`}>
+          <PostCard article={article} />
         </Link>
       ))}
     </PostListContainer>

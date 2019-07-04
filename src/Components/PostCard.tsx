@@ -1,11 +1,11 @@
 import React from "react";
-import { IPostSimple } from "../shared-interfaces";
+import { ISimplePost } from "../shared-interfaces";
 import styled from "styled-components";
-import { Avatar } from "./Avatar";
+import Avatar from "./Avatar";
 import moment from "moment";
 
 interface IProps {
-  post: IPostSimple;
+  article: ISimplePost;
 }
 
 const PostCardImage = styled.img`
@@ -65,30 +65,30 @@ const CountableIcon = styled.i`
 
 const CountableNumber = styled.div``;
 
-export const PostCard: React.SFC<IProps> = ({ post }) => (
+export const PostCard: React.SFC<IProps> = ({ article: { id, title, video_id, content, author_id, view_count, createdAt, updatedAt, like_count, comment_count } }) => (
   <PostCardContainer>
     <PostCardImage
-      src={`https://img.youtube.com/vi/${post.videoId}/0.jpg`}
+      src={`https://img.youtube.com/vi/${video_id}/0.jpg`}
       style={{ width: "100%", backgroundColor: "black" }}
     />
-    <Title>{post.title}</Title>
+    <Title>{title}</Title>
     <PostInfoContainer>
       <PostInfoLeft>
-        <Datetime>{moment(post.datetime).fromNow()}</Datetime>
-        <Avatar style={"nicknameOnly"} user={post.author} />
+        <Datetime>{moment(updatedAt).fromNow()}</Datetime>
+        <Avatar style={"nicknameOnly"} user_id={author_id} />
       </PostInfoLeft>
       <PostInfoRight>
         <CountableInfo>
           <CountableIcon className="far fa-comments" />
-          <CountableNumber>{post.commentsCount}</CountableNumber>
+          <CountableNumber>{comment_count}</CountableNumber>
         </CountableInfo>
         <CountableInfo>
           <CountableIcon className="far fa-thumbs-up" />
-          <CountableNumber>{post.likes}</CountableNumber>
+          <CountableNumber>{like_count}</CountableNumber>
         </CountableInfo>
         <CountableInfo>
           <CountableIcon className="far fa-eye" />
-          <CountableNumber>{post.views}</CountableNumber>
+          <CountableNumber>{view_count}</CountableNumber>
         </CountableInfo>
       </PostInfoRight>
     </PostInfoContainer>

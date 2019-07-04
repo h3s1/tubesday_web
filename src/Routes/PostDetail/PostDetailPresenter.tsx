@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
-import { Avatar } from "../../Components/Avatar";
-import { IPost, IComment } from "../../shared-interfaces";
+// import { Avatar } from "../../Components/Avatar";
+import { IPost } from "../../shared-interfaces";
 import { headerHeight } from "../../config/_mixin";
 
 const PlayerWrapper = styled.div`
   position: fixed;
   z-index: 3;
   width: 100%;
-  top: ${headerHeight}
+  top: ${headerHeight};
   height: 54vw; /* Player ratio: 100 / (1280 / 720) */
 `;
 
@@ -99,11 +99,11 @@ const Comments = styled.div`
   }
 `;
 
-const CommentsHeader = styled.div`
-  padding: 0.5rem 2rem 0.5rem 1rem;
-`;
+// const CommentsHeader = styled.div`
+//   padding: 0.5rem 2rem 0.5rem 1rem;
+// `;
 
-const CommentContent = styled.div``;
+// const CommentContent = styled.div``;
 
 const ShortcutContainer = styled.div`
   width: 100%;
@@ -128,13 +128,13 @@ const ShortcutIcon = styled.i``;
 const PostList = styled.div``;
 
 /* Change if PostList finished */
-const DummyPost = styled.img`
-  width: 100%;
-`;
+// const DummyPost = styled.img`
+//   width: 100%;
+// `;
 
 interface IProps {
   id: number;
-  data: IPost;
+  article: IPost;
   scrollToSection: (sectionRef: React.RefObject<HTMLDivElement>) => void;
   homeRef: React.RefObject<HTMLDivElement>;
   commentRef: React.RefObject<HTMLDivElement>;
@@ -142,18 +142,9 @@ interface IProps {
 }
 
 export const PostDetailPresenter: React.SFC<IProps> = ({
-  data: {
-    videoId,
-    tags,
-    title,
-    author,
-    datetime,
-    content,
-    likes,
-    comments,
-    views
+  article: {
+    id, title, video_id, content, author_id, view_count, createdAt, updatedAt, like_count, tags
   },
-  id,
   scrollToSection,
   homeRef,
   commentRef,
@@ -162,7 +153,7 @@ export const PostDetailPresenter: React.SFC<IProps> = ({
   <>
     <PlayerWrapper className="player-wrapper">
       <ReactPlayer
-        url={`https://www.youtube.com/watch?v=${videoId}`}
+        url={`https://www.youtube.com/watch?v=${video_id}`}
         playing={false}
         loop={true}
         controls={false}
@@ -194,36 +185,36 @@ export const PostDetailPresenter: React.SFC<IProps> = ({
     <FakeHeader />
     <PostDetailContainer ref={homeRef}>
       <TagContainer>
-        {tags.map((tag: string) => (
-          <Tag>#{tag}</Tag>
+        {tags && tags.map(({content}: {content: string}) => (
+          <Tag>#{content}</Tag>
         ))}
       </TagContainer>
       <Title>{title}</Title>
       <SubInfoContainer>
-        <Avatar user={author} />
-        <Datetime>{datetime}</Datetime>
+        {/* <Avatar user={article.author_id} /> */}
+        <Datetime>{createdAt}</Datetime>
       </SubInfoContainer>
       <CountableInfoContainer>
         <CountableInfo>
           <CountableInfoIcon className="far fa-comments" />
-          <CountableNumber>{comments.length}</CountableNumber>
+          {/* <CountableNumber>{comment_count}</CountableNumber> */}
         </CountableInfo>
         <CountableInfo>
           <CountableInfoIcon className="far fa-thumbs-up" />
-          <CountableNumber>{likes}</CountableNumber>
+          <CountableNumber>{like_count}</CountableNumber>
         </CountableInfo>
         <CountableInfo>
           <CountableInfoIcon className="far fa-eye" />
-          <CountableNumber>{views}</CountableNumber>
+          <CountableNumber>{view_count}</CountableNumber>
         </CountableInfo>
       </CountableInfoContainer>
       <Content dangerouslySetInnerHTML={{ __html: content }} />
     </PostDetailContainer>
     <Comments ref={commentRef}>
-      <CommentsHeader>
-        댓글 | 총 <strong>{comments.length}</strong> 개
-      </CommentsHeader>
-      {comments.map((comment: IComment) => {
+      {/* <CommentsHeader>
+        댓글 | 총 <strong>{article.comment_count}</strong> 개
+      </CommentsHeader> */}
+      {/* {comments.map((comment: IComment) => {
         console.log(comment);
         return (
           <Comment>
@@ -231,15 +222,9 @@ export const PostDetailPresenter: React.SFC<IProps> = ({
             <CommentContent>{comment.content}</CommentContent>
           </Comment>
         );
-      })}
+      })} */}
     </Comments>
     <PostList ref={listRef}>
-      <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
-      <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
-      <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
-      <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
-      <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
-      <DummyPost src="http://n.sinaimg.cn/front/650/w2000h1050/20190203/ipAE-hsmkfyp1909355.jpg" />
     </PostList>
   </>
 );

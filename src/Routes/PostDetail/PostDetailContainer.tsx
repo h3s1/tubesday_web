@@ -1,7 +1,7 @@
 import React, { createRef } from "react";
 import { PostDetailPresenter } from "./PostDetailPresenter";
-import { postApi } from "../../api";
-import { IPost } from "../../shared-interfaces";
+import { articleApi } from "../../api";
+// import { IPost } from "../../shared-interfaces";
 
 interface IProps {
   match: {
@@ -13,7 +13,7 @@ interface IProps {
 
 interface IState {
   status: string;
-  data: IPost | null;
+  article: any | null;
 }
 
 export default class PostDetailContainer extends React.Component<
@@ -23,7 +23,7 @@ export default class PostDetailContainer extends React.Component<
   constructor(props: IProps) {
     super(props);
     this.state = {
-      data: null,
+      article: null,
       status: "success"
     };
   }
@@ -32,8 +32,7 @@ export default class PostDetailContainer extends React.Component<
   private commentRef = createRef<HTMLDivElement>();
   private listRef = createRef<HTMLDivElement>();
 
-  async componentDidMount() {
-    console.log("didmount");
+  componentDidMount = async () => {
     try {
       const {
         match: {
@@ -41,67 +40,8 @@ export default class PostDetailContainer extends React.Component<
         }
       } = this.props;
       const parsedId = parseInt(postId);
-      const {
-        data: { data: postData }
-      } = await postApi.postDetail(parsedId);
-      // const {
-      //   data: { data: commentsData }
-      // } = await postApi.comments(parsedId);
-      this.setState({
-        data: {
-          ...postData,
-          author: {
-            profileImage:
-              "https://hocpianoonline.com/wp-content/uploads/2019/01/Billie-Eilish-400x400.png",
-            nickname: postData.author
-          },
-          tags: ["아이돌", "뮤비"],
-          likes: 10,
-          views: 20,
-          comments: [
-            {
-              author: {
-                profileImage:
-                  "https://hocpianoonline.com/wp-content/uploads/2019/01/Billie-Eilish-400x400.png",
-                nickname: "billie"
-              },
-              content: "hello"
-            },
-            {
-              author: {
-                profileImage:
-                  "https://hocpianoonline.com/wp-content/uploads/2019/01/Billie-Eilish-400x400.png",
-                nickname: "billie"
-              },
-              content: "hello"
-            },
-            {
-              author: {
-                profileImage:
-                  "https://hocpianoonline.com/wp-content/uploads/2019/01/Billie-Eilish-400x400.png",
-                nickname: "billie"
-              },
-              content: "hello"
-            },
-            {
-              author: {
-                profileImage:
-                  "https://hocpianoonline.com/wp-content/uploads/2019/01/Billie-Eilish-400x400.png",
-                nickname: "billie"
-              },
-              content: "hello"
-            },
-            {
-              author: {
-                profileImage:
-                  "https://hocpianoonline.com/wp-content/uploads/2019/01/Billie-Eilish-400x400.png",
-                nickname: "billie"
-              },
-              content: "hello"
-            }
-          ]
-        }
-      });
+      const {data:article} = await articleApi.getArticle(parsedId);
+      this.setState({ article });
     } catch (error) {
       alert(error);
     } finally {
@@ -129,13 +69,13 @@ export default class PostDetailContainer extends React.Component<
         params: { postId }
       }
     } = this.props;
-    const { data, status } = this.state;
-    console.log(data);
+    const { article, status } = this.state;
+    console.log(article);
     return (
-      data &&
+      article &&
       status === "success" && (
         <PostDetailPresenter
-          data={data}
+        article={article}
           id={parseInt(postId)}
           scrollToSection={this.scrollToSection}
           homeRef={this.homeRef}
