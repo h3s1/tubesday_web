@@ -132,7 +132,7 @@ const PostList = styled.div``;
 //   width: 100%;
 // `;
 
-interface IProps {
+interface Props {
   id: number;
   article: IPost;
   comments: IComment[];
@@ -142,7 +142,7 @@ interface IProps {
   listRef: React.RefObject<HTMLDivElement>;
 }
 
-export const PostDetailPresenter: React.SFC<IProps> = ({
+export const PostDetailPresenter: React.SFC<Props> = ({
   article: {
     id, title, video_id, content, author_id, view_count, createdAt, updatedAt, like_count, tags
   },

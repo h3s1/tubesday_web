@@ -2,15 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import CreatePostPresenter from "./CreatePostPresenter";
 
-interface IProps {
+interface Props {
   searchedResults: any[];
 }
 
-interface IState {
+interface State {
   searchedResults: any[];
 }
 
-class CreatePostContainer extends React.Component<IProps, IState> {
+class CreatePostContainer extends React.Component<Props, State> {
   state = { searchedResults: [] };
 
   componentDidUpdate(prevProps: {}, prevState: {}) {

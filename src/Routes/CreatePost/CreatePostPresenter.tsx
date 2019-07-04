@@ -4,11 +4,11 @@ import styled from "styled-components";
 import ClipList from "../../Components/ClipList";
 import CreateForm from "../../Components/CreateForm";
 
-interface IProps {
+interface Props {
   searchedResults: object[];
 }
 
-interface IState {
+interface State {
   type: string;
   selectedResult: {};
   post: {
@@ -19,8 +19,8 @@ interface IState {
 }
 
 export default class CreatePostPresenter extends React.Component<
-  IProps,
-  IState
+  Props,
+  State
 > {
   constructor(props: { searchedResults: object[] }) {
     super(props);

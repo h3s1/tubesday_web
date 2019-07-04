@@ -52,7 +52,7 @@ const SearchTerm = styled.input<{ open: boolean }>`
   outline: none;
 `;
 
-// interface IProps extends RouteComponentProps<any> {}
+// interface Props extends RouteComponentProps<any> {}
 
 const HeaderSearch = ({ history }: RouteComponentProps) => {
   const node: any = useRef({});

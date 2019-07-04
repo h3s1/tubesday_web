@@ -5,14 +5,14 @@ import axios from "axios";
 
 const Search = Input.Search;
 
-interface IProps {
+interface Props {
   addSearchedResults(searchedResults: any[]): { type: string; payload: {} };
 }
-interface IState {
+interface State {
   searchText: string;
 }
 
-class SearchPresenter extends React.Component<IProps, IState> {
+class SearchPresenter extends React.Component<Props, State> {
   state = { searchText: "" };
 
   handleTextInput = (e: React.ChangeEvent<HTMLInputElement>) => {

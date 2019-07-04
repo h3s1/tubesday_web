@@ -4,11 +4,11 @@ import { Button } from "antd";
 import CreateSearch from "../CreateSearch";
 import { headerHeight } from "../../config/_mixin";
 
-interface IProps {
+interface Props {
   type: string;
 }
 
-const PostCreateHeader: React.SFC<IProps> = ({ type }) => (
+const PostCreateHeader: React.SFC<Props> = ({ type }) => (
   <HeaderContainer>
     {type === "search_results" ? <CreateSearch /> : <NavContainer />}
   </HeaderContainer>

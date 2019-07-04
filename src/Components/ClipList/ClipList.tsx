@@ -2,16 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import ClipCard from "../ClipCard";
 
-interface IProps {
+interface Props {
   searchedResults: any[];
   handleNext(selected: number): void;
 }
-interface IState {
+interface State {
   searchedResults: any[];
   selected: number;
 }
 
-class ClipList extends React.Component<IProps, IState> {
+class ClipList extends React.Component<Props, State> {
   state = { searchedResults: [], selected: -1 };
 
   componentDidUpdate(prevProps: { searchedResults: any[] }, prevState: {}) {

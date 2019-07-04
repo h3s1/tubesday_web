@@ -3,10 +3,10 @@ import { Input, Select } from "antd";
 import ClipCard from "../ClipCard";
 import styled from "styled-components";
 
-interface IProps {
+interface Props {
   selectedResult: any;
 }
-interface IState {
+interface State {
   title: string;
   channelId: string;
   img: string;
@@ -16,8 +16,8 @@ interface IState {
 const { TextArea } = Input;
 // const Option = Select.Option;
 
-class PostForm extends React.Component<IProps, IState> {
-  constructor(props: IProps) {
+class PostForm extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       title: props.selectedResult.snippet.title,

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Avatar from "./Avatar";
 import moment from "moment";
 
-interface IProps {
+interface Props {
   article: ISimplePost;
 }
 
@@ -65,7 +65,7 @@ const CountableIcon = styled.i`
 
 const CountableNumber = styled.div``;
 
-export const PostCard: React.SFC<IProps> = ({ article: { id, title, video_id, content, author_id, view_count, createdAt, updatedAt, like_count, comment_count } }) => (
+export const PostCard: React.SFC<Props> = ({ article: { id, title, video_id, content, author_id, view_count, createdAt, updatedAt, like_count, comment_count } }) => (
   <PostCardContainer>
     <PostCardImage
       src={`https://img.youtube.com/vi/${video_id}/0.jpg`}

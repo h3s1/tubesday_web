@@ -4,7 +4,7 @@ import { articleApi } from "../../api";
 import { IPost, IComment } from '../../shared-interfaces';
 // import { IPost } from "../../shared-interfaces";
 
-interface IProps {
+interface Props {
   match: {
     params: {
       postId: string;
@@ -12,17 +12,17 @@ interface IProps {
   };
 }
 
-interface IState {
+interface State {
   status: string;
   article: IPost | null;
   comments: IComment[]
 }
 
 export default class PostDetailContainer extends React.Component<
-  IProps,
-  IState
+  Props,
+  State
 > {
-  constructor(props: IProps) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       article: null,

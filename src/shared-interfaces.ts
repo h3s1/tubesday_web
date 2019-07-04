@@ -3,6 +3,8 @@ export interface IAvatar {
   nickname: string;
 }
 
+export type Category = "new" | "hot"
+
 export interface IComment {
   id: number,
   content: string,

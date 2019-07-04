@@ -5,7 +5,7 @@ import { media } from "../../config/_mixin";
 
 const { Meta } = Card;
 
-interface IProps {
+interface Props {
   isSelected: boolean;
   title: string;
   channelId: string;
@@ -18,7 +18,7 @@ interface IProps {
 //   // isSelected:boolean
 // }
 
-const ClipCard: React.SFC<IProps> = ({
+const ClipCard: React.SFC<Props> = ({
   isSelected,
   title,
   img,
