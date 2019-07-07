@@ -9,7 +9,22 @@
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
+
+    <!-- PWA Settings -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="192x192"
+      href="/asset/android-chrome-192x192.png"
+    />
+    <link
+      rel="apple-touch-icon-precomposed"
+      sizes="512x512"
+      href="/asset/android-chrome-512x512.png"
+    />
+    <meta name="apple-mobile-web-app-title" content="Youtopia" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
