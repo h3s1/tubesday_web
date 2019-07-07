@@ -14,5 +14,8 @@ export const articleApi = {
     baseApi.get<IComment[]>(`articles/${article_id}/comments`),
     baseApi.get<ISimplePost[]>(`recommendations`)
   ]),
-  postArticle: ({title, video_id, content, tags}: CreateArticleParameter) => baseApi.post<IPost>(`articles/`, {title, video_id, content, tags})
+  postArticle: ({title, video_id, content, tags, token}: CreateArticleParameter) => {
+    baseApi.defaults.headers.common["Authorization"] = token;
+    return baseApi.post<IPost>(`articles/`, {title, video_id, content, tags})
+  }
 };
