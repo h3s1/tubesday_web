@@ -61,7 +61,6 @@ const HeaderSearch = ({ history }: RouteComponentProps) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleClickOutside = (e: any) => {
-    console.log("clicking anywhere");
     if (node.current.contains(e.target)) {
       // inside click
       return;
@@ -80,7 +79,6 @@ const HeaderSearch = ({ history }: RouteComponentProps) => {
       setOpen(!open);
     } else {
       if (inputRef !== undefined && inputRef.current !== undefined) {
-        console.log(inputRef);
         inputRef.current.focus();
       }
       setOpen(!open);

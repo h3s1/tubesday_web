@@ -161,8 +161,6 @@ export const PostDetailPresenter: React.SFC<Props> = ({
         controls={false}
         width="100%"
         height="100%"
-        onReady={() => console.log("video ready")}
-        onError={() => console.log("video error")}
         style={{
           position: "absolute",
           top: 0,
@@ -217,7 +215,6 @@ export const PostDetailPresenter: React.SFC<Props> = ({
         댓글 | 총 <strong>{comments.length}</strong> 개
       </CommentsHeader>
       {comments.map((comment: IComment) => {
-        console.log(comment);
         return (
           <Comment>
             <Avatar user_id={comment.author_id} />

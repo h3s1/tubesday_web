@@ -39,7 +39,6 @@ export default class PostListContainer extends React.Component<Props, State> {
 
   render() {
     const { menu, articles } = this.state;
-    console.log(articles)
     return (
       <PostListPresenter
         onClickMenuChange={this.onClickMenuChange}

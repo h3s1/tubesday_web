@@ -44,7 +44,6 @@ export default class PostDetailContainer extends React.Component<
       } = this.props;
       const parsedId = parseInt(postId);
       const [{ data: article }, {data: comments}] = await articleApi.getArticle(parsedId);
-      console.log(article, comments)
       this.setState({ article, comments });
     } catch (error) {
       alert(error);
@@ -53,10 +52,6 @@ export default class PostDetailContainer extends React.Component<
   }
 
   scrollToSection = (sectionRef: React.RefObject<HTMLDivElement>) => {
-    console.log(
-      sectionRef.current,
-      sectionRef.current ? sectionRef.current.offsetTop : undefined
-    );
     this.homeRef &&
       this.homeRef.current &&
       window.scrollTo({
@@ -74,7 +69,6 @@ export default class PostDetailContainer extends React.Component<
       }
     } = this.props;
     const { article,comments, status } = this.state;
-    console.log(article);
     return (
       article &&
       status === "success" && (
