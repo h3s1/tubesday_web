@@ -2,8 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
 import  Avatar  from "../../Components/Avatar";
-import { IPost, IComment } from "../../shared-interfaces";
+import { IPost, IComment, ISimplePost } from "../../shared-interfaces";
 import { headerHeight } from "../../config/_mixin";
+import { Link } from 'react-router-dom';
+import { PostCard } from '../../Components/PostCard';
 
 const PlayerWrapper = styled.div`
   position: fixed;
@@ -125,7 +127,10 @@ const Shortcut = styled.button`
 
 const ShortcutIcon = styled.i``;
 
-const PostList = styled.div``;
+const PostList = styled.div`
+  padding: 0.5rem;
+  min-height: 20rem;
+`;
 
 /* Change if PostList finished */
 // const DummyPost = styled.img`
@@ -136,6 +141,7 @@ interface Props {
   id: number;
   article: IPost;
   comments: IComment[];
+  recommendations: ISimplePost[];
   scrollToSection: (sectionRef: React.RefObject<HTMLDivElement>) => void;
   homeRef: React.RefObject<HTMLDivElement>;
   commentRef: React.RefObject<HTMLDivElement>;
@@ -147,6 +153,7 @@ export const PostDetailPresenter: React.SFC<Props> = ({
     id, title, video_id, content, author_id, view_count, createdAt, updatedAt, like_count, tags
   },
   comments,
+  recommendations,
   scrollToSection,
   homeRef,
   commentRef,
@@ -223,7 +230,12 @@ export const PostDetailPresenter: React.SFC<Props> = ({
         );
       })}
     </Comments>
-    <PostList ref={listRef}>
+      <PostList ref={listRef}>
+      {recommendations.map((article: ISimplePost) => (
+        <Link key={article.id} to={`/posts/${article.id}/`}>
+          <PostCard article={article} />
+        </Link>
+      ))}
     </PostList>
   </>
 );
