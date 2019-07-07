@@ -11,9 +11,22 @@ const Header: React.SFC<{}> = ({}) => (
       <Logo src={logo} />
     </Link>
     <IconContainer>
+      {!localStorage.getItem("jwt") ? <>
+      <SLink to="/user/sign_up">
+        <Icon className="fas fa-user-plus"/>
+      </SLink>
+      <SLink to="/user/sign_in">
+        <Icon className="fas fa-sign-in-alt"/>
+      </SLink></>:
+      <>
+      < LogOutContainer onClick={()=> {window.location.reload();
+        localStorage.removeItem("jwt")}}>
+        <Icon className="fas fa-sign-out-alt"/>
+      </LogOutContainer>
       <SLink to="/posts/create">
         <Icon className="fas fa-pen" />
-      </SLink>
+      </SLink></>
+      }
       <SearchContainer>
         <HeaderSearch />
       </SearchContainer>
@@ -29,6 +42,10 @@ const SearchContainer = styled.button`
 const SLink = styled(Link)`
   margin: 0.5rem;
 `;
+
+const LogOutContainer = styled.span`
+margin: 0.5rem;
+`
 
 const IconContainer = styled.div``;
 
