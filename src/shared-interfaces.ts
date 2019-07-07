@@ -58,5 +58,5 @@ export interface GetArticlesRes {
 }
 
 export interface CreateArticleParameter {
-  title: string , video_id: string, content:string, tags: { content: string }[], token: string
+  title: string , video_id: string, content:string, tags: string[], token: string
 }
