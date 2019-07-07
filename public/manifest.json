@@ -4,11 +4,6 @@
   "swtart_url": "/",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
       "src": "/asset/apple-touch-icon-57x57.png",
       "size": "57x57",
       "type": "image/png"
