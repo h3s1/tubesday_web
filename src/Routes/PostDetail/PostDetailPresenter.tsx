@@ -185,8 +185,8 @@ export const PostDetailPresenter: React.SFC<Props> = ({
     <FakeHeader />
     <PostDetailContainer ref={homeRef}>
       <TagContainer>
-        {tags && tags.map(({content}: {content: string}) => (
-          <Tag>#{content}</Tag>
+        {tags && tags.map(({content}: {content: string}, index: number) => (
+          <Tag key={index}>#{content}</Tag>
         ))}
       </TagContainer>
       <Title>{title}</Title>
@@ -214,9 +214,9 @@ export const PostDetailPresenter: React.SFC<Props> = ({
       <CommentsHeader>
         댓글 | 총 <strong>{comments.length}</strong> 개
       </CommentsHeader>
-      {comments.map((comment: IComment) => {
+      {comments.map((comment: IComment, index: number) => {
         return (
-          <Comment>
+          <Comment key={index}>
             <Avatar user_id={comment.author_id} />
             <CommentContent>{comment.content}</CommentContent>
           </Comment>
