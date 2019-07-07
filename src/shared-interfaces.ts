@@ -57,3 +57,6 @@ export interface GetArticlesRes {
   statusText: "OK" | any
 }
 
+export interface CreateArticleParameter {
+  title: string , video_id: string, content:string, tags: { content: string }[]
+}

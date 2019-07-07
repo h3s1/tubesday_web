@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ISimplePost,  IComment, Category, IPost } from './shared-interfaces';
+import { ISimplePost,  IComment, Category, IPost, CreateArticleParameter } from './shared-interfaces';
 
 const baseApi = axios.create({
   baseURL: "https://youtupia-dev.herokuapp.com/"
@@ -14,4 +14,5 @@ export const articleApi = {
     baseApi.get<IComment[]>(`articles/${article_id}/comments`),
     baseApi.get<ISimplePost[]>(`recommendations`)
   ]),
+  postArticle: ({title, video_id, content, tags}: CreateArticleParameter) => baseApi.post<IPost>(`articles/`, {title, video_id, content, tags})
 };
