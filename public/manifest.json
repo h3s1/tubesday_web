@@ -10,6 +10,11 @@
     },
     {
       "src": "/asset/android-chrome-192x192.png",
+      "size": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/asset/android-chrome-192x192.png",
       "size": "192x192",
       "type": "image/png"
     },
