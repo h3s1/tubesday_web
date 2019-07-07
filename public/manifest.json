@@ -2,7 +2,6 @@
   "short_name": "Youtopia",
   "name": "Youtopia",
   "swtart_url": "/",
-  "display": "standalone",
   "icons": [
     {
       "src": "favicon.ico",
