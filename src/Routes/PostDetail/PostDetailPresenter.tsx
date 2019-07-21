@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
-import  Avatar  from "../../Components/Avatar";
+import Avatar from "../../Components/Avatar";
 import { IPost, IComment, ISimplePost } from "../../shared-interfaces";
 import { headerHeight } from "../../config/_mixin";
 import { Link } from 'react-router-dom';
@@ -150,7 +150,7 @@ interface Props {
 
 export const PostDetailPresenter: React.SFC<Props> = ({
   article: {
-    id, title, video_id, content, author_id, view_count, createdAt, updatedAt, like_count, tags
+    id, title, videoId, content, authorId, viewCount, createdAt, updatedAt, likeCount, tags
   },
   comments,
   recommendations,
@@ -159,83 +159,83 @@ export const PostDetailPresenter: React.SFC<Props> = ({
   commentRef,
   listRef
 }) => (
-  <>
-    <PlayerWrapper className="player-wrapper">
-      <ReactPlayer
-        url={`https://www.youtube.com/watch?v=${video_id}`}
-        playing={false}
-        loop={true}
-        controls={false}
-        width="100%"
-        height="100%"
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0
-        }}
-      />
-    </PlayerWrapper>
-    <FixedContainer>
+    <>
+      <PlayerWrapper className="player-wrapper">
+        <ReactPlayer
+          url={`https://www.youtube.com/watch?v=${videoId}`}
+          playing={false}
+          loop={true}
+          controls={false}
+          width="100%"
+          height="100%"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0
+          }}
+        />
+      </PlayerWrapper>
+      <FixedContainer>
+        <FakeHeader />
+        <ShortcutContainer>
+          <Shortcut onClick={() => scrollToSection(homeRef)}>
+            <ShortcutIcon className="fas fa-home" />
+          </Shortcut>
+          <Shortcut onClick={() => scrollToSection(commentRef)}>
+            <ShortcutIcon className="far fa-comments" />
+          </Shortcut>
+          <Shortcut onClick={() => scrollToSection(listRef)}>
+            <ShortcutIcon className="far fa-list-alt" />
+          </Shortcut>
+        </ShortcutContainer>
+      </FixedContainer>
       <FakeHeader />
-      <ShortcutContainer>
-        <Shortcut onClick={() => scrollToSection(homeRef)}>
-          <ShortcutIcon className="fas fa-home" />
-        </Shortcut>
-        <Shortcut onClick={() => scrollToSection(commentRef)}>
-          <ShortcutIcon className="far fa-comments" />
-        </Shortcut>
-        <Shortcut onClick={() => scrollToSection(listRef)}>
-          <ShortcutIcon className="far fa-list-alt" />
-        </Shortcut>
-      </ShortcutContainer>
-    </FixedContainer>
-    <FakeHeader />
-    <PostDetailContainer ref={homeRef}>
-      <TagContainer>
-        {tags && tags.map(({content}: {content: string}, index: number) => (
-          <Tag key={index}>#{content}</Tag>
-        ))}
-      </TagContainer>
-      <Title>{title}</Title>
-      <SubInfoContainer>
-        {/* <Avatar user={article.author_id} /> */}
-        <Datetime>{createdAt}</Datetime>
-      </SubInfoContainer>
-      <CountableInfoContainer>
-        <CountableInfo>
-          <CountableInfoIcon className="far fa-comments" />
-          {/* <CountableNumber>{comment_count}</CountableNumber> */}
-        </CountableInfo>
-        <CountableInfo>
-          <CountableInfoIcon className="far fa-thumbs-up" />
-          <CountableNumber>{like_count}</CountableNumber>
-        </CountableInfo>
-        <CountableInfo>
-          <CountableInfoIcon className="far fa-eye" />
-          <CountableNumber>{view_count}</CountableNumber>
-        </CountableInfo>
-      </CountableInfoContainer>
-      <Content dangerouslySetInnerHTML={{ __html: content }} />
-    </PostDetailContainer>
-    <Comments ref={commentRef}>
-      <CommentsHeader>
-        댓글 | 총 <strong>{comments.length}</strong> 개
+      <PostDetailContainer ref={homeRef}>
+        <TagContainer>
+          {tags && tags.map(({ content }: { content: string }, index: number) => (
+            <Tag key={index}>#{content}</Tag>
+          ))}
+        </TagContainer>
+        <Title>{title}</Title>
+        <SubInfoContainer>
+          {/* <Avatar user={article.author_id} /> */}
+          <Datetime>{createdAt}</Datetime>
+        </SubInfoContainer>
+        <CountableInfoContainer>
+          <CountableInfo>
+            <CountableInfoIcon className="far fa-comments" />
+            {/* <CountableNumber>{comment_count}</CountableNumber> */}
+          </CountableInfo>
+          <CountableInfo>
+            <CountableInfoIcon className="far fa-thumbs-up" />
+            <CountableNumber>{likeCount}</CountableNumber>
+          </CountableInfo>
+          <CountableInfo>
+            <CountableInfoIcon className="far fa-eye" />
+            <CountableNumber>{viewCount}</CountableNumber>
+          </CountableInfo>
+        </CountableInfoContainer>
+        <Content dangerouslySetInnerHTML={{ __html: content }} />
+      </PostDetailContainer>
+      <Comments ref={commentRef}>
+        <CommentsHeader>
+          댓글 | 총 <strong>{comments.length}</strong> 개
       </CommentsHeader>
-      {comments.map((comment: IComment, index: number) => {
-        return (
-          <Comment key={index}>
-            <Avatar user_id={comment.author_id} />
-            <CommentContent>{comment.content}</CommentContent>
-          </Comment>
-        );
-      })}
-    </Comments>
+        {comments.map((comment: IComment, index: number) => {
+          return (
+            <Comment key={index}>
+              <Avatar user_id={comment.authorId} />
+              <CommentContent>{comment.content}</CommentContent>
+            </Comment>
+          );
+        })}
+      </Comments>
       <PostList ref={listRef}>
-      {recommendations.map((article: ISimplePost) => (
-        <Link key={article.id} to={`/posts/${article.id}/`}>
-          <PostCard article={article} />
-        </Link>
-      ))}
-    </PostList>
-  </>
-);
+        {recommendations.map((article: ISimplePost) => (
+          <Link key={article.id} to={`/posts/${article.id}/`}>
+            <PostCard article={article} />
+          </Link>
+        ))}
+      </PostList>
+    </>
+  );

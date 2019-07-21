@@ -65,30 +65,30 @@ const CountableIcon = styled.i`
 
 const CountableNumber = styled.div``;
 
-export const PostCard: React.SFC<Props> = ({ article: { id, title, video_id, content, author_id, view_count, createdAt, updatedAt, like_count, comment_count } }) => (
+export const PostCard: React.SFC<Props> = ({ article: { id, title, videoId, content, authorId, viewCount, createdAt, updatedAt, likeCount, commentCount } }) => (
   <PostCardContainer>
     <PostCardImage
-      src={`https://img.youtube.com/vi/${video_id}/0.jpg`}
+      src={`https://img.youtube.com/vi/${videoId}/0.jpg`}
       style={{ width: "100%", backgroundColor: "black" }}
     />
     <Title>{title}</Title>
     <PostInfoContainer>
       <PostInfoLeft>
         <Datetime>{moment(updatedAt).fromNow()}</Datetime>
-        <Avatar style={"nicknameOnly"} user_id={author_id} />
+        <Avatar style={"nicknameOnly"} user_id={authorId} />
       </PostInfoLeft>
       <PostInfoRight>
         <CountableInfo>
           <CountableIcon className="far fa-comments" />
-          <CountableNumber>{comment_count}</CountableNumber>
+          <CountableNumber>{commentCount}</CountableNumber>
         </CountableInfo>
         <CountableInfo>
           <CountableIcon className="far fa-thumbs-up" />
-          <CountableNumber>{like_count}</CountableNumber>
+          <CountableNumber>{likeCount}</CountableNumber>
         </CountableInfo>
         <CountableInfo>
           <CountableIcon className="far fa-eye" />
-          <CountableNumber>{view_count}</CountableNumber>
+          <CountableNumber>{viewCount}</CountableNumber>
         </CountableInfo>
       </PostInfoRight>
     </PostInfoContainer>

@@ -8,7 +8,6 @@ import styled from "styled-components";
 const { Content } = Layout;
 
 const CustomMenu = styled(Menu)`
-  line-height: 4rem;
   color: #a9a8a7;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -30,29 +29,29 @@ export const PostListPresenter: React.SFC<Props> = ({
   menu,
   articles
 }) => (
-  <Content style={{ padding: "0" }}>
-    <CustomMenu mode="horizontal" selectedKeys={[menu]} style={{}}>
-      <Menu.Item
-        key="new"
-        onClick={() => onClickMenuChange("new" as Category)}
-        style={{ gridColumn: "1/2", textAlign: "center" }}
-      >
-        🆕최신 게시물
+    <Content style={{ padding: "0" }}>
+      <CustomMenu mode="horizontal" selectedKeys={[menu]} style={{}}>
+        <Menu.Item
+          key="new"
+          onClick={() => onClickMenuChange("new" as Category)}
+          style={{ gridColumn: "1/2", textAlign: "center" }}
+        >
+          🆕최신 게시물
       </Menu.Item>
-      <Menu.Item
-        key="hot"
-        onClick={() => onClickMenuChange("hot" as Category)}
-        style={{ gridColumn: "2/3", textAlign: "center" }}
-      >
-        🔥HOT 게시물
+        <Menu.Item
+          key="hot"
+          onClick={() => onClickMenuChange("hot" as Category)}
+          style={{ gridColumn: "2/3", textAlign: "center" }}
+        >
+          🔥HOT 게시물
       </Menu.Item>
-    </CustomMenu>
-    <PostListContainer>
-      {articles.map((article: ISimplePost) => (
-        <Link key={article.id} to={`/posts/${article.id}/`}>
-          <PostCard article={article} />
-        </Link>
-      ))}
-    </PostListContainer>
-  </Content>
-);
+      </CustomMenu>
+      <PostListContainer>
+        {articles.map((article: ISimplePost) => (
+          <Link key={article.id} to={`/posts/${article.id}/`}>
+            <PostCard article={article} />
+          </Link>
+        ))}
+      </PostListContainer>
+    </Content>
+  );
