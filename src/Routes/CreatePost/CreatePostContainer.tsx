@@ -1,9 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
 import CreatePostPresenter from "./CreatePostPresenter";
+import { withContext } from "../../contexts";
 
 interface Props {
-  searchedResults: any[];
+  data: {searchedResults: any[]}
 }
 
 interface State {
@@ -15,7 +15,7 @@ class CreatePostContainer extends React.Component<Props, State> {
 
   componentDidUpdate(prevProps: {}, prevState: {}) {
     if (prevProps !== this.props) {
-      this.setState({ searchedResults: this.props.searchedResults });
+      this.setState({ searchedResults: this.props.data.searchedResults });
     }
   }
 
@@ -24,6 +24,4 @@ class CreatePostContainer extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: {}): {} => state;
-
-export default connect(mapStateToProps)(CreatePostContainer);
+export default withContext(CreatePostContainer)
