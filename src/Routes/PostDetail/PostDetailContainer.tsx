@@ -2,7 +2,6 @@ import React, { createRef } from "react";
 import { PostDetailPresenter } from "./PostDetailPresenter";
 import { articleApi } from "../../api";
 import { IPost, IComment, ISimplePost } from '../../shared-interfaces';
-// import { IPost } from "../../shared-interfaces";
 
 interface Props {
   match: {
@@ -22,7 +21,7 @@ interface State {
 export default class PostDetailContainer extends React.Component<
   Props,
   State
-> {
+  > {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -45,7 +44,7 @@ export default class PostDetailContainer extends React.Component<
         }
       } = this.props;
       const parsedId = parseInt(postId);
-      const [{ data: article }, {data: comments}, {data: recommendations}] = await articleApi.getArticle(parsedId);
+      const [{ data: article }, { data: comments }, { data: recommendations }] = await articleApi.getArticle(parsedId);
       this.setState({ article, comments, recommendations });
     } catch (error) {
       alert(error);
@@ -70,7 +69,9 @@ export default class PostDetailContainer extends React.Component<
         params: { postId }
       }
     } = this.props;
-    const { article,comments,recommendations, status } = this.state;
+    const { article, comments, recommendations, status } = this.state;
+    console.log(article, comments, recommendations
+    )
     return (
       article &&
       status === "success" && (

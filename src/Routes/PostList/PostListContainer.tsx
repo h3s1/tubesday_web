@@ -1,9 +1,9 @@
 import React from "react";
 import { PostListPresenter } from "./PostListPresenter";
-import {  ISimplePost, Category } from "../../shared-interfaces";
+import { ISimplePost, Category } from "../../shared-interfaces";
 import { articleApi } from '../../api';
 
-interface Props {}
+interface Props { }
 
 interface State {
   articles: ISimplePost[],
@@ -25,7 +25,7 @@ export default class PostListContainer extends React.Component<Props, State> {
 
   componentDidMount = async () => {
     const { menu } = this.state;
-    const { data : articles } = await articleApi.getArticles(menu, 1);
+    const { data: articles } = await articleApi.getArticles(menu, 1);
     this.setState({ articles })
   }
 
@@ -33,14 +33,16 @@ export default class PostListContainer extends React.Component<Props, State> {
     if (this.state.menu !== prevState.menu) {
       const { menu } = this.state;
       const { data: articles } = await articleApi.getArticles(menu, 1);
-      this.setState({articles})
+      this.setState({ articles })
     }
   }
 
   render() {
     const { menu, articles } = this.state;
+    const isDataLoaded = articles.length !== 0;
+    console.log(articles);
     return (
-      <PostListPresenter
+      isDataLoaded && <PostListPresenter
         onClickMenuChange={this.onClickMenuChange}
         menu={menu}
         articles={articles}

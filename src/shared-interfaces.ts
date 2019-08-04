@@ -1,6 +1,8 @@
 export interface IAvatar {
-  profileImage?: string;
-  nickname: string;
+  id: number,
+  nickname: string,
+  email: string,
+  avatarURL: string
 }
 
 export type Category = "new" | "hot"
@@ -8,8 +10,7 @@ export type Category = "new" | "hot"
 export interface IComment {
   id: number,
   content: string,
-  article: number,
-  authorId: number,
+  user: IAvatar,
   createdAt: string,
   updatedAt: string
 }
@@ -19,7 +20,7 @@ export interface ISimplePost {
   title: string;
   videoId: string;
   content: string;
-  authorId: number;
+  user: IAvatar;
   viewCount: number;
   createdAt: string;
   updatedAt: string;
@@ -32,7 +33,7 @@ export interface IPost {
   title: string,
   videoId: string,
   content: string,
-  authorId: number,
+  user: IAvatar;
   viewCount: number,
   createdAt: string,
   updatedAt: string,

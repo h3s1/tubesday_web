@@ -1,10 +1,15 @@
 import React from "react";
-// import { Avatar as AntAvatar } from "antd";
+import { Avatar as AntAvatar } from "antd";
 import { IAvatar } from "../shared-interfaces";
-// import styled from "styled-components";
+import styled from '../typed-components';
 
 interface Props {
-  user_id: number;
+  user: {
+    id: number,
+    nickname: string,
+    email: string,
+    avatarURL: string,
+  },
   style?: "photoOnly" | "nicknameOnly" | "both";
 }
 
@@ -12,14 +17,14 @@ interface State {
   user: IAvatar | null;
 }
 
-// const AvatarContainer = styled.div`
-//   display: flex;
-//   align-items: center;
-// `;
+const AvatarContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
-// const AntAvatarStyle = {
-//   marginRight: "0.5rem"
-// };
+const AntAvatarStyle = {
+  marginRight: "0.5rem"
+};
 
 export default class Avatar extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -34,29 +39,29 @@ export default class Avatar extends React.Component<Props, State> {
   // }
 
   render() {
-    // const { style } = this.props;
-    const { user_id } = this.props;
+    console.log(this.props);
+    const { style } = this.props;
+    const { nickname, avatarURL } = this.props.user;
     return (
-      <div>{user_id}</div>
-      // profileImage ? (
-      //   <AvatarContainer>
-      //     {(style === "photoOnly" || style === "both" || style === undefined) && (
-      //       <AntAvatar style={AntAvatarStyle} src={profileImage} />
-      //     )}
-      //     {(style === "nicknameOnly" || style === "both" || style === undefined) &&
-      //       nickname}
-      //   </AvatarContainer>
-      // ) : (
-      //     <AvatarContainer>
-      //       {(style === "photoOnly" || style === "both" || style === undefined) && (
-      //         <AntAvatar style={AntAvatarStyle} icon="user">
-      //           {nickname}
-      //         </AntAvatar>
-      //       )}
-      //       {(style === "nicknameOnly" || style === "both" || style === undefined) &&
-      //         nickname}
-      //     </AvatarContainer>
-      //   )
+      avatarURL ? (
+        <AvatarContainer>
+          {(style === "photoOnly" || style === "both" || style === undefined) && (
+            <AntAvatar style={AntAvatarStyle} src={avatarURL} />
+          )}
+          {(style === "nicknameOnly" || style === "both" || style === undefined) &&
+            nickname}
+        </AvatarContainer>
+      ) : (
+          <AvatarContainer>
+            {(style === "photoOnly" || style === "both" || style === undefined) && (
+              <AntAvatar style={AntAvatarStyle} icon="user">
+                {nickname}
+              </AntAvatar>
+            )}
+            {(style === "nicknameOnly" || style === "both" || style === undefined) &&
+              nickname}
+          </AvatarContainer>
+        )
     )
-  }       
+  }
 }

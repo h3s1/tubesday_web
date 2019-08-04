@@ -65,17 +65,17 @@ const CountableIcon = styled.i`
 
 const CountableNumber = styled.div``;
 
-export const PostCard: React.SFC<Props> = ({ article: { id, title, videoId, content, authorId, viewCount, createdAt, updatedAt, likeCount, commentCount } }) => (
+export const PostCard: React.SFC<Props> = ({ article: { id, title, videoId, content, user, viewCount, createdAt, updatedAt, likeCount, commentCount } }) => (
   <PostCardContainer>
     <PostCardImage
-      src={`https://img.youtube.com/vi/${videoId}/0.jpg`}
+      src={`https://i1.ytimg.com/vi/${videoId}/mqdefault.jpg`}
       style={{ width: "100%", backgroundColor: "black" }}
     />
     <Title>{title}</Title>
     <PostInfoContainer>
       <PostInfoLeft>
         <Datetime>{moment(updatedAt).fromNow()}</Datetime>
-        <Avatar style={"nicknameOnly"} user_id={authorId} />
+        <Avatar style={"nicknameOnly"} user={user} />
       </PostInfoLeft>
       <PostInfoRight>
         <CountableInfo>

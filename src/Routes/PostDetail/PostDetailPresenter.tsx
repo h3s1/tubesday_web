@@ -1,11 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
-import Avatar from "../../Components/Avatar";
 import { IPost, IComment, ISimplePost } from "../../shared-interfaces";
 import { headerHeight } from "../../config/_mixin";
 import { Link } from 'react-router-dom';
 import { PostCard } from '../../Components/PostCard';
+import moment from 'moment';
+import Comment from "../../Components/Comment"
+import 'moment/locale/ko'  // without this line it didn't work
+import Avatar from '../../Components/Avatar';
+
 
 const PlayerWrapper = styled.div`
   position: fixed;
@@ -38,7 +42,7 @@ const FakeHeader = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 700;
   margin: 0.5rem 0 1rem;
 `;
@@ -61,6 +65,7 @@ const SubInfoContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 0.5rem 0;
+  opacity: .8;
 `;
 
 const CountableInfoContainer = styled.div`
@@ -71,7 +76,7 @@ const CountableInfoContainer = styled.div`
 `;
 
 const CountableInfoIcon = styled.i`
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin-right: 0.5rem;
 `;
 
@@ -84,19 +89,17 @@ const CountableNumber = styled.div``;
 
 const Datetime = styled.div``;
 
-const Content = styled.div``;
-
-const Comment = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 2rem 0.5rem 1rem;
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.3);
+const Content = styled.div`
+  line-height:1.3;
+  padding: 1rem 0;
 `;
+
+const CustomComment = styled(Comment)`
+`
 
 const Comments = styled.div`
   height: 100%;
-  ${Comment}:nth-child(2n) {
+  ${CustomComment}:nth-child(2n) {
     background-color: rgba(0, 0, 0, 0.1);
   }
 `;
@@ -105,7 +108,6 @@ const CommentsHeader = styled.div`
   padding: 0.5rem 2rem 0.5rem 1rem;
 `;
 
-const CommentContent = styled.div``;
 
 const ShortcutContainer = styled.div`
   width: 100%;
@@ -150,7 +152,7 @@ interface Props {
 
 export const PostDetailPresenter: React.SFC<Props> = ({
   article: {
-    id, title, videoId, content, authorId, viewCount, createdAt, updatedAt, likeCount, tags
+    id, title, videoId, content, user, viewCount, createdAt, updatedAt, likeCount, tags
   },
   comments,
   recommendations,
@@ -198,13 +200,13 @@ export const PostDetailPresenter: React.SFC<Props> = ({
         </TagContainer>
         <Title>{title}</Title>
         <SubInfoContainer>
-          {/* <Avatar user={article.author_id} /> */}
-          <Datetime>{createdAt}</Datetime>
+          <Avatar user={user} />
+          <Datetime>{moment(createdAt).fromNow()}</Datetime>
         </SubInfoContainer>
         <CountableInfoContainer>
           <CountableInfo>
             <CountableInfoIcon className="far fa-comments" />
-            {/* <CountableNumber>{comment_count}</CountableNumber> */}
+            <CountableNumber>{comments.length}</CountableNumber>
           </CountableInfo>
           <CountableInfo>
             <CountableInfoIcon className="far fa-thumbs-up" />
@@ -223,10 +225,7 @@ export const PostDetailPresenter: React.SFC<Props> = ({
       </CommentsHeader>
         {comments.map((comment: IComment, index: number) => {
           return (
-            <Comment key={index}>
-              <Avatar user_id={comment.authorId} />
-              <CommentContent>{comment.content}</CommentContent>
-            </Comment>
+            <CustomComment key={index} comment={comment} />
           );
         })}
       </Comments>
