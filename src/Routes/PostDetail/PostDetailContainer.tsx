@@ -1,7 +1,7 @@
 import React, { createRef } from "react";
 import { PostDetailPresenter } from "./PostDetailPresenter";
 import { articleApi } from "../../api";
-import { IPost, IComment, ISimplePost } from '../../shared-interfaces';
+import { IPost, IComment, ISimplePost } from "../../shared-interfaces";
 
 interface Props {
   match: {
@@ -14,14 +14,11 @@ interface Props {
 interface State {
   status: string;
   article: IPost | null;
-  recommendations: ISimplePost[]
-  comments: IComment[]
+  recommendations: ISimplePost[];
+  comments: IComment[];
 }
 
-export default class PostDetailContainer extends React.Component<
-  Props,
-  State
-  > {
+export default class PostDetailContainer extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -44,13 +41,17 @@ export default class PostDetailContainer extends React.Component<
         }
       } = this.props;
       const parsedId = parseInt(postId);
-      const [{ data: article }, { data: comments }, { data: recommendations }] = await articleApi.getArticle(parsedId);
+      const [
+        { data: article },
+        { data: comments },
+        { data: recommendations }
+      ] = await articleApi.getArticle(parsedId);
       this.setState({ article, comments, recommendations });
     } catch (error) {
       alert(error);
     } finally {
     }
-  }
+  };
 
   scrollToSection = (sectionRef: React.RefObject<HTMLDivElement>) => {
     this.homeRef &&
@@ -70,8 +71,7 @@ export default class PostDetailContainer extends React.Component<
       }
     } = this.props;
     const { article, comments, recommendations, status } = this.state;
-    console.log(article, comments, recommendations
-    )
+    console.log(article, comments, recommendations);
     return (
       article &&
       status === "success" && (

@@ -3,13 +3,12 @@ import styled from "styled-components";
 import ReactPlayer from "react-player";
 import { IPost, IComment, ISimplePost } from "../../shared-interfaces";
 import { headerHeight } from "../../config/_mixin";
-import { Link } from 'react-router-dom';
-import { PostCard } from '../../Components/PostCard';
-import moment from 'moment';
-import Comment from "../../Components/Comment"
-import 'moment/locale/ko'  // without this line it didn't work
-import Avatar from '../../Components/Avatar';
-
+import { Link } from "react-router-dom";
+import { PostCard } from "../../Components/PostCard";
+import moment from "moment";
+import Comment from "../../Components/Comment";
+import "moment/locale/ko"; // without this line it didn't work
+import Avatar from "../../Components/Avatar";
 
 const PlayerWrapper = styled.div`
   position: fixed;
@@ -65,7 +64,7 @@ const SubInfoContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 0.5rem 0;
-  opacity: .8;
+  opacity: 0.8;
 `;
 
 const CountableInfoContainer = styled.div`
@@ -90,12 +89,11 @@ const CountableNumber = styled.div``;
 const Datetime = styled.div``;
 
 const Content = styled.div`
-  line-height:1.3;
+  line-height: 1.3;
   padding: 1rem 0;
 `;
 
-const CustomComment = styled(Comment)`
-`
+const CustomComment = styled(Comment)``;
 
 const Comments = styled.div`
   height: 100%;
@@ -107,7 +105,6 @@ const Comments = styled.div`
 const CommentsHeader = styled.div`
   padding: 0.5rem 2rem 0.5rem 1rem;
 `;
-
 
 const ShortcutContainer = styled.div`
   width: 100%;
@@ -152,7 +149,16 @@ interface Props {
 
 export const PostDetailPresenter: React.SFC<Props> = ({
   article: {
-    id, title, videoId, content, user, viewCount, createdAt, updatedAt, likeCount, tags
+    id,
+    title,
+    videoId,
+    content,
+    user,
+    viewCount,
+    createdAt,
+    updatedAt,
+    likeCount,
+    tags
   },
   comments,
   recommendations,
@@ -161,80 +167,86 @@ export const PostDetailPresenter: React.SFC<Props> = ({
   commentRef,
   listRef
 }) => (
-    <>
-      <PlayerWrapper className="player-wrapper">
-        <ReactPlayer
-          url={`https://www.youtube.com/watch?v=${videoId}`}
-          playing={false}
-          loop={true}
-          controls={false}
-          width="100%"
-          height="100%"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0
-          }}
-        />
-      </PlayerWrapper>
-      <FixedContainer>
-        <FakeHeader />
-        <ShortcutContainer>
-          <Shortcut onClick={() => scrollToSection(homeRef)}>
-            <ShortcutIcon className="fas fa-home" />
-          </Shortcut>
-          <Shortcut onClick={() => scrollToSection(commentRef)}>
-            <ShortcutIcon className="far fa-comments" />
-          </Shortcut>
-          <Shortcut onClick={() => scrollToSection(listRef)}>
-            <ShortcutIcon className="far fa-list-alt" />
-          </Shortcut>
-        </ShortcutContainer>
-      </FixedContainer>
+  <>
+    <PlayerWrapper className="player-wrapper">
+      <ReactPlayer
+        url={`https://www.youtube.com/watch?v=${videoId}`}
+        playing={false}
+        loop={true}
+        controls={false}
+        width="100%"
+        height="100%"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0
+        }}
+      />
+    </PlayerWrapper>
+    <FixedContainer>
       <FakeHeader />
-      <PostDetailContainer ref={homeRef}>
-        <TagContainer>
-          {tags && tags.map(({ content }: { content: string }, index: number) => (
+      <ShortcutContainer>
+        <Shortcut onClick={() => scrollToSection(homeRef)}>
+          <ShortcutIcon className="fas fa-home" />
+        </Shortcut>
+        <Shortcut onClick={() => scrollToSection(commentRef)}>
+          <ShortcutIcon className="far fa-comments" />
+        </Shortcut>
+        <Shortcut onClick={() => scrollToSection(listRef)}>
+          <ShortcutIcon className="far fa-list-alt" />
+        </Shortcut>
+      </ShortcutContainer>
+    </FixedContainer>
+    <FakeHeader />
+    <PostDetailContainer ref={homeRef}>
+      <TagContainer>
+        {tags &&
+          tags.map(({ content }: { content: string }, index: number) => (
             <Tag key={index}>#{content}</Tag>
           ))}
-        </TagContainer>
-        <Title>{title}</Title>
-        <SubInfoContainer>
-          <Avatar user={user} />
-          <Datetime>{moment(createdAt).fromNow()}</Datetime>
-        </SubInfoContainer>
-        <CountableInfoContainer>
-          <CountableInfo>
-            <CountableInfoIcon className="far fa-comments" />
-            <CountableNumber>{comments.length}</CountableNumber>
-          </CountableInfo>
-          <CountableInfo>
-            <CountableInfoIcon className="far fa-thumbs-up" />
-            <CountableNumber>{likeCount}</CountableNumber>
-          </CountableInfo>
-          <CountableInfo>
-            <CountableInfoIcon className="far fa-eye" />
-            <CountableNumber>{viewCount}</CountableNumber>
-          </CountableInfo>
-        </CountableInfoContainer>
-        <Content dangerouslySetInnerHTML={{ __html: content }} />
-      </PostDetailContainer>
-      <Comments ref={commentRef}>
-        <CommentsHeader>
-          댓글 | 총 <strong>{comments.length}</strong> 개
-      </CommentsHeader>
-        {comments.map((comment: IComment, index: number) => {
-          return (
-            <CustomComment key={index} comment={comment} />
-          );
-        })}
-      </Comments>
-      <PostList ref={listRef}>
-        {recommendations.map((article: ISimplePost) => (
-          <Link key={article.id} to={`/posts/${article.id}/`}>
-            <PostCard article={article} />
-          </Link>
+      </TagContainer>
+      <Title>{title}</Title>
+      <SubInfoContainer>
+        <Avatar user={user} />
+        <Datetime>{moment(createdAt).fromNow()}</Datetime>
+      </SubInfoContainer>
+      <CountableInfoContainer>
+        <CountableInfo>
+          <CountableInfoIcon className="far fa-comments" />
+          <CountableNumber>{comments.length}</CountableNumber>
+        </CountableInfo>
+        <CountableInfo>
+          <CountableInfoIcon className="far fa-thumbs-up" />
+          <CountableNumber>{likeCount}</CountableNumber>
+        </CountableInfo>
+        <CountableInfo>
+          <CountableInfoIcon className="far fa-eye" />
+          <CountableNumber>{viewCount}</CountableNumber>
+        </CountableInfo>
+      </CountableInfoContainer>
+      <Content>
+        {content.split("\n").map(line => (
+          <span>
+            {line}
+            <br />
+          </span>
         ))}
-      </PostList>
-    </>
-  );
+      </Content>
+    </PostDetailContainer>
+    <Comments ref={commentRef}>
+      <CommentsHeader>
+        댓글 | 총 <strong>{comments.length}</strong> 개
+      </CommentsHeader>
+      {comments.map((comment: IComment, index: number) => {
+        return <CustomComment key={index} comment={comment} />;
+      })}
+    </Comments>
+    <PostList ref={listRef}>
+      {recommendations.map((article: ISimplePost) => (
+        <Link key={article.id} to={`/posts/${article.id}/`}>
+          <PostCard article={article} />
+        </Link>
+      ))}
+    </PostList>
+  </>
+);
