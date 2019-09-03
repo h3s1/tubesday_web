@@ -2,7 +2,8 @@
   "private": true,
   "name": "youtopia_client",
   "scripts": {
-    "web:start": "lerna run start --scope=@h3s1/youtopia_web"
+    "web:start": "lerna run start --scope=@h3s1/youtopia_web",
+    "web:build": "lerna run build --scope=@h3s1/youtopia_web"
   },
   "repository": {
     "type": "git",
