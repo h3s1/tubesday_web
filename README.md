@@ -17,3 +17,4 @@
 | `lerna clean`     | 각 패키지에 설치된 `node_modules`를 제거합니다.                             |
 | `yarn web:start`  | 로컬에서 `@h3s1/youtopia_web`의 웹 프론트엔드 서버를 구동합니다.            |
 | `yarn web:build`  | `@h3s1/youtopia_web`의 웹 프론트엔드를 빌드합니다.                          |
+| `yarn nuke`       | 루트 노드를 포함한 각 패키지의 `node_modules`를 제거합니다.                 |
