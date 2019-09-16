@@ -2,8 +2,10 @@
   "private": true,
   "name": "youtopia_client",
   "scripts": {
-    "web:start": "lerna run start --scope=@h3s1/youtopia_web",
-    "web:build": "lerna run build --scope=@h3s1/youtopia_web",
+    "web:start": "lerna run start --scope=@h3s1/youtopia_web --stream",
+    "web:build": "lerna run build --scope=@h3s1/youtopia_web --stream",
+    "app:start": "lerna run start --scope=@h3s1/youtopia_app --stream",
+    "app:android": "lerna run android --scope=@h3s1/youtopia_app --stream",
     "nuke": "rm -r node_modules; for d in packages/*/node_modules; do echo $d; rm -r $d; done"
   },
   "workspaces": [
