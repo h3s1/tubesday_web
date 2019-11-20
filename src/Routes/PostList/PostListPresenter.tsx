@@ -36,14 +36,14 @@ export const PostListPresenter: React.SFC<Props> = ({
           onClick={() => onClickMenuChange("new" as Category)}
           style={{ gridColumn: "1/2", textAlign: "center" }}
         >
-          🆕최신 게시물
+          <span role="img" aria-label="recent posts">🆕</span>최신 게시물
       </Menu.Item>
         <Menu.Item
           key="hot"
           onClick={() => onClickMenuChange("hot" as Category)}
           style={{ gridColumn: "2/3", textAlign: "center" }}
         >
-          🔥HOT 게시물
+          <span role="img" aria-label="hot posts">🔥</span>HOT 게시물
       </Menu.Item>
       </CustomMenu>
       <PostListContainer>

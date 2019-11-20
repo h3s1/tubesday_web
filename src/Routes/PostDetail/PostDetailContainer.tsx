@@ -64,14 +64,13 @@ export default class PostDetailContainer extends React.Component<Props, State> {
       });
   };
 
-  render() {
+  public render() {
     const {
       match: {
         params: { postId }
       }
     } = this.props;
     const { article, comments, recommendations, status } = this.state;
-    console.log(article, comments, recommendations);
     return (
       article &&
       status === "success" && (
@@ -79,7 +78,7 @@ export default class PostDetailContainer extends React.Component<Props, State> {
           article={article}
           comments={comments}
           recommendations={recommendations}
-          id={parseInt(postId)}
+          id={parseInt(postId, 10)}
           scrollToSection={this.scrollToSection}
           homeRef={this.homeRef}
           commentRef={this.commentRef}
