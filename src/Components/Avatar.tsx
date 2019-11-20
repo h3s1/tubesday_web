@@ -9,7 +9,7 @@ interface Props {
     nickname: string,
     email: string,
     avatarURL: string,
-  },
+  };
   style?: "photoOnly" | "nicknameOnly" | "both";
 }
 
@@ -23,23 +23,18 @@ const AvatarContainer = styled.div`
 `;
 
 const AntAvatarStyle = {
-  marginRight: "0.5rem"
+  marginRight: "0.5rem",
 };
 
 export default class Avatar extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      user: null
-    }
+      user: null,
+    };
   }
 
-  // componentDidMount = async () => {
-  //   const user = await 
-  // }
-
-  render() {
-    console.log(this.props);
+  public render() {
     const { style } = this.props;
     const { nickname, avatarURL } = this.props.user;
     return (
@@ -62,6 +57,6 @@ export default class Avatar extends React.Component<Props, State> {
               nickname}
           </AvatarContainer>
         )
-    )
+    );
   }
 }

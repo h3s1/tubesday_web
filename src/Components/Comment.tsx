@@ -12,18 +12,18 @@ const Container = styled.div`
 `;
 const CommentContentContainer = styled.div`
     font-size: 0.8rem;
-`
+`;
 const CommentUser = styled.div`
     font-weight: 700;
     color: grey;
     margin-bottom: 0.5rem;
-`
+`;
 const CommentContent = styled.div`
   line-height: 1.5;
 `;
 
 interface Props {
-    comment: IComment
+    comment: IComment;
 }
 
 interface State {
@@ -35,9 +35,9 @@ export default class Comment extends React.Component<Props, State> {
         super(props);
         this.state = {
 
-        }
+        };
     }
-    render() {
+    public render() {
         const { comment } = this.props;
         return (
             <Container>
@@ -47,6 +47,6 @@ export default class Comment extends React.Component<Props, State> {
                     <CommentContent>{comment.content}</CommentContent>
                 </CommentContentContainer>
             </Container>
-        )
+        );
     }
 }
